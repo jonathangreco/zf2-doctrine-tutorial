@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="Bootstrap.php" colors="true"
+        stopOnError="true"
+        stopOnFailure="false"
+        strict="true"
+        verbose="true">
+    <testsuites>
+        <testsuite name="All Modules">
+            <directory>../module/Album/tests/AlbumTest</directory>
+            <directory>../module/Application/tests/ApplicationTest</directory>
+        </testsuite>
+    </testsuites>
+   <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory>../module/Application/src/</directory>
+            <directory>../module/Album/src/</directory>
+        </whitelist>
+        <blacklist>
+            <directory suffix=".php">../vendor</directory>
+            <directory suffix=".php">../config</directory>
+            <file>../module/Application/Module.php</file>
+            <file>../module/Application/tests/ApplicationBootstrap.php</file>
+            <file>../module/Album/Module.php</file>
+            <file>../module/Album/tests/AlbumBootstrap.php</file>
+        </blacklist>
+    </filter>
+    <logging>
+	  <log type="coverage-html" target="../build/coverage/" charset="UTF-8"
+	       yui="true" highlight="false"
+	       lowUpperBound="35" highLowerBound="70"/>
+	  <log type="coverage-clover" target="../build/logs/clover.xml"/>
+	  <log type="junit" target="../build/logs/junit.xml" logIncompleteSkipped="false"/>
+	</logging>
+</phpunit>
