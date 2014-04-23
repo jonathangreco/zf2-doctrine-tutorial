@@ -9,7 +9,7 @@ Unit tests are centralize in phpunit.xml on tests root directory. Feel free to f
 Installation
 ------------
 
-Run `php composer.phar for install` vendor's library and set params for yous 2 Databases.
+Run `php composer.phar for install` vendor's library and set params for your 2 Databases.
 Run this command line :  
 `vendor/bin/doctrine-module orm:validate-schema`
 
@@ -126,14 +126,14 @@ And here the code for configure factories in you application module.php file :
 For retrieving your EntityManager Everywhere use :
 
 ```php
-$this->em = $this->getServiceManager()->get('doctrine.entitymanager.orm_default');->getConnection()
+$this->em = $this->getServiceManager()->get('doctrine.entitymanager.orm_default')->getConnection();
 
 ```
 OR :
 
 ```php
 
-$this->em = $this->getServiceManager()->get('doctrine.entitymanager.other_DB');->getConnection()
+$this->em = $this->getServiceManager()->get('doctrine.entitymanager.other_DB')->getConnection();
 
 ```
 
