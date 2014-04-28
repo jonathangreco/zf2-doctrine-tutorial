@@ -3,70 +3,67 @@
 /**
  * Classe permettant les traitements sur la table album
  * @package Album
- * @author Jonathan Greco <nataniel.greco@gmail.com>  
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
+ * @author Florent Blaison <florent.blaison@gmail.com>
  */
 
 namespace Album\Service;
 
-use Zend\ServiceManager\ServiceManagerAwareInterface;
-use Zend\ServiceManager\ServiceManagerInterface;
-use Zend\ServiceManager\ServiceManager;
-use Doctrine\ORM\EntityManager;
-
+use Doctrine\Common\Persistence\ObjectManager;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Factory as InputFactory;
-use Zend\InputFilter\InputFilterAwareInterface;
-use Zend\InputFilter\InputFilterInterface; 
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
 use Album\Entity\Album;
 
-class AlbumService implements ServiceManagerAwareInterface
+class AlbumService implements ServiceLocatorAwareInterface
 {
 
-	protected $sm;
-	protected $em;
-    protected $inputFilter;
+    use ServiceLocatorAwareTrait;
 
-    public function setServiceManager(ServiceManager $serviceManager)
-    {
-    	$this->sm = $serviceManager;
-    	return $this;
-    }
-
-    /*
-     * Retrieve service manager instance
-     *
-     * @return ServiceManager
+    /**
+     * @var \Doctrine\Common\Persistence\ObjectManager
      */
-    public function getServiceManager()
+    private $em;
+
+    /**
+     * @var InputFilter
+     */
+    private $inputFilter;
+
+    public function __construct(ObjectManager $em)
     {
-        return $this->sm;
+        $this->em = $em;
     }
 
-    public function fetchAll()
+    public function getAll()
     {
-    	$this->em = $this->getServiceManager()->get('doctrine.entitymanager.orm_default');
     	return $this->em->getRepository('Album\Entity\Album')->findAll();
     }
 
     public function getAlbum($id)
     {
-        $this->em = $this->getServiceManager()->get('doctrine.entitymanager.orm_default');
         return $this->em->getRepository('Album\Entity\Album')->find($id);
 
     }
 
+    public function addAlbum(Album $album)
+    {
+        $this->em->persist($album);
+        $this->em->flush($album);
+    }
+
     public function saveAlbum(Album $album)
     {
-    	$this->em = $this->getServiceManager()->get('doctrine.entitymanager.orm_default');
     	$connect = $this->em->getConnection();
 
         $data = array(
-            'artist' => $album->artist,
-            'title'  => $album->title,
+            'artist' => $album->getArtist(),
+            'title'  => $album->getTitle(),
         );
 
-        $id = (int)$album->id;
+        $id = (int)$album->getId();
         if ($id == 0) {
             $connect->insert('Album', $data);
         } else {
@@ -80,14 +77,8 @@ class AlbumService implements ServiceManagerAwareInterface
 
     public function deleteAlbum($id)
     {
-    	$this->em = $this->getServiceManager()->get('doctrine.entitymanager.orm_default');
     	$connect = $this->em->getConnection();
         $connect->delete('Album',array('id' => $id));
-    }
-
-    public function getArrayCopy()
-    {
-        return get_object_vars($this);
     }
 
     public function exchangeArray($data)
@@ -95,11 +86,6 @@ class AlbumService implements ServiceManagerAwareInterface
         $this->id     = (isset($data['id'])) ? $data['id'] : null;
         $this->artist = (isset($data['artist'])) ? $data['artist'] : null;
         $this->title  = (isset($data['title'])) ? $data['title'] : null;
-    }
-
-    public function setInputFilter(InputFilterInterface $inputFilter)
-    {
-        throw new \Exception("Not used");
     }
 
     public function getInputFilter()
@@ -110,52 +96,52 @@ class AlbumService implements ServiceManagerAwareInterface
             $factory = new InputFactory();
 
             $inputFilter->add($factory->createInput(array(
-                'name'       => 'id',
-                'required'   => true,
-                'filters' => array(
-                    array('name'    => 'Int'),
-                ),
-            )));
+                        'name' => 'id',
+                        'required' => true,
+                        'filters' => array(
+                            array('name' => 'Int'),
+                        ),
+                    )));
 
             $inputFilter->add($factory->createInput(array(
-                'name'     => 'artist',
-                'required' => true,
-                'filters'  => array(
-                    array('name' => 'StripTags'),
-                    array('name' => 'StringTrim'),
-                ),
-                'validators' => array(
-                    array(
-                        'name'    => 'StringLength',
-                        'options' => array(
-                            'encoding' => 'UTF-8',
-                            'min'      => 1,
-                            'max'      => 100,
+                        'name' => 'artist',
+                        'required' => true,
+                        'filters' => array(
+                            array('name' => 'StripTags'),
+                            array('name' => 'StringTrim'),
                         ),
-                    ),
-                ),
-            )));
+                        'validators' => array(
+                            array(
+                                'name' => 'StringLength',
+                                'options' => array(
+                                    'encoding' => 'UTF-8',
+                                    'min' => 1,
+                                    'max' => 100,
+                                ),
+                            ),
+                        ),
+                    )));
 
             $inputFilter->add($factory->createInput(array(
-                'name'     => 'title',
-                'required' => true,
-                'filters'  => array(
-                    array('name' => 'StripTags'),
-                    array('name' => 'StringTrim'),
-                ),
-                'validators' => array(
-                    array(
-                        'name'    => 'StringLength',
-                        'options' => array(
-                            'encoding' => 'UTF-8',
-                            'min'      => 1,
-                            'max'      => 100,
+                        'name' => 'title',
+                        'required' => true,
+                        'filters' => array(
+                            array('name' => 'StripTags'),
+                            array('name' => 'StringTrim'),
                         ),
-                    ),
-                ),
-            )));
+                        'validators' => array(
+                            array(
+                                'name' => 'StringLength',
+                                'options' => array(
+                                    'encoding' => 'UTF-8',
+                                    'min' => 1,
+                                    'max' => 100,
+                                ),
+                            ),
+                        ),
+                    )));
 
-            $this->inputFilter = $inputFilter;        
+            $this->inputFilter = $inputFilter;
         }
 
         return $this->inputFilter;

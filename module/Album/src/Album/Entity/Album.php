@@ -3,7 +3,8 @@
  * Classe représentant l'entité Album avec Doctrine
  * 
  * @package Album
- * @author Jonathan Greco <nataniel.greco@gmail.com>  
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
+ * @author Florent Blaison <florent.blaison@gmail.com>
  */
 
 namespace Album\Entity;
@@ -23,24 +24,19 @@ class Album
      * @ORM\Column(name="id",type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    public $id;
+    private $id;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="string", length=48, unique=false)
      */
-    public $artist;
+    private $artist;
 
     /**
  	 * @ORM\Column(type="string", length=48, unique=false)
      */
-    public $title;
-
-     /**
-     * @ORM\Column(type="integer", options={"default"=1})
-     */
-    protected $discs;
+    private $title;
 
     public function getArrayCopy()
     {
@@ -52,5 +48,53 @@ class Album
         $this->id     = (isset($data['id'])) ? $data['id'] : null;
         $this->artist = (isset($data['artist'])) ? $data['artist'] : null;
         $this->title  = (isset($data['title'])) ? $data['title'] : null;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getArtist()
+    {
+        return $this->artist;
+    }
+
+    /**
+     * @param null|string $artist
+     */
+    public function setArtist($artist)
+    {
+        $this->artist = $artist;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int|null $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
     }
 }

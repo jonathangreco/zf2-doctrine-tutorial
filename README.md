@@ -10,8 +10,6 @@ Installation
 ------------
 
 Run `php composer.phar for install` vendor's library and set params for your 2 Databases.
-Run this command line :  
-`vendor/bin/doctrine-module orm:validate-schema`
 
 here's the code (generic) for configure Doctrine with 2 Entity Manager
 
@@ -46,10 +44,10 @@ return array(
     ),
     'configuration' => array(
       'orm_default' => array(
-          'metadata_cache'    => 'filesystem',
-          'query_cache'       => 'filesystem',
-          'result_cache'      => 'filesystem',
-          'hydration_cache'   => 'filesystem',
+          'metadata_cache'    => 'array',
+          'query_cache'       => 'array',
+          'result_cache'      => 'array',
+          'hydration_cache'   => 'array',
           'driver'            => 'orm_default',
           'generate_proxies'  => true,
           'proxy_dir'         => 'data/DoctrineORMModule/Proxy',
@@ -57,10 +55,10 @@ return array(
           'filters'           => array()
       ),
       'other_DB' => array(
-          'metadata_cache'    => 'filesystem',
-          'query_cache'       => 'filesystem',
-          'result_cache'      => 'filesystem',
-          'hydration_cache'   => 'filesystem',
+          'metadata_cache'    => 'array',
+          'query_cache'       => 'array',
+          'result_cache'      => 'array',
+          'hydration_cache'   => 'array',
           'driver'            => 'other_DB',
           'generate_proxies'  => true,
           'proxy_dir'         => 'data/DoctrineORMModule/Proxy',
@@ -102,7 +100,12 @@ return array(
 );
 ```
 
-And here the code for configure factories in you application module.php file :
+Create both databases
+
+Run this command line to generate tables :
+`php public index.php orm:schema-tool:update --force`
+
+And here the code for configure factories in you application Module.php file :
 ```php
  public function getServiceConfig()
     {
@@ -126,14 +129,14 @@ And here the code for configure factories in you application module.php file :
 For retrieving your EntityManager Everywhere use :
 
 ```php
-$this->em = $this->getServiceManager()->get('doctrine.entitymanager.orm_default')->getConnection();
+$this->em = $this->getServiceManager()->get('doctrine.entitymanager.orm_default');
 
 ```
 OR :
 
 ```php
 
-$this->em = $this->getServiceManager()->get('doctrine.entitymanager.other_DB')->getConnection();
+$this->em = $this->getServiceManager()->get('doctrine.entitymanager.other_DB');
 
 ```
 

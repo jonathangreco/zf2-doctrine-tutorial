@@ -7,8 +7,8 @@
  <h1><?php echo $this->escapeHtml($title); ?></h1>
 
  <p>Are you sure that you want to delete
-     '<?php echo $this->escapeHtml($album->title); ?>' by
-     '<?php echo $this->escapeHtml($album->artist); ?>'?
+     '<?php echo $this->escapeHtml($this->album->getTitle()); ?>' by
+     '<?php echo $this->escapeHtml($this->album->getArtist()); ?>'?
  </p>
  <?php
  $url = $this->url('album', array(
@@ -18,7 +18,7 @@
  ?>
  <form action="<?php echo $url; ?>" method="post">
  <div>
-     <input type="hidden" name="id" value="<?php echo (int) $album->id; ?>" />
+     <input type="hidden" name="id" value="<?php echo $this->album->getId(); ?>" />
      <input type="submit" name="del" value="Yes" />
      <input type="submit" name="del" value="No" />
  </div>

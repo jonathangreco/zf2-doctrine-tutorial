@@ -1,28 +1,30 @@
 <?php
 /**
- * 
+ *
  * @package Album
- * @author Jonathan Greco <nataniel.greco@gmail.com>  
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
+ * @author Florent Blaison <florent.blaison@gmail.com>
  */
 namespace Album;
+
 return array(
-    'controllers' => array(
-        'invokables' => array(
-            'Album\Controller\Album' => 'Album\Controller\AlbumController',
+    'controllers'     => array(
+        'factories' => array(
+            'Album\Controller\Album' => 'Album\Factory\AlbumControllerFactory',
         ),
     ),
     // The following section is new and should be added to your file
-    'router' => array(
+    'router'          => array(
         'routes' => array(
             'album' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/album[/:action][/:id]',
+                    'route'       => '/album[/:action][/:id]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ),
-                    'defaults' => array(
+                    'defaults'    => array(
                         'controller' => 'Album\Controller\Album',
                         'action'     => 'index',
                     ),
@@ -31,24 +33,33 @@ return array(
         ),
     ),
     'service_manager' => array(
+        'factories' => array(
+            'Album\Service\Album' => 'Album\Factory\AlbumServiceFactory',
+        ),
+    ),
+    'view_manager'    => array(
+        'template_map' => array(
+            'album/album/index'  => __DIR__ . '/../view/album/album/index.phtml',
+            'album/album/add'    => __DIR__ . '/../view/album/album/add.phtml',
+            'album/album/edit'   => __DIR__ . '/../view/album/album/edit.phtml',
+            'album/album/delete' => __DIR__ . '/../view/album/album/delete.phtml',
+        ),
+    ),
+    'form_elements'   => array(
         'invokables' => array(
-            'AlbumService' => 'Album\Service\AlbumService',
+            'Album\Form\Album'    => 'Album\Form\AlbumForm',
+            'Album\Form\AddAlbum' => 'Album\Form\AddAlbumForm',
         ),
     ),
-    'view_manager' => array(
-        'template_path_stack' => array(
-            'album' => __DIR__ . '/../view',
-        ),
-    ),
-    'doctrine' => array(
+    'doctrine'        => array(
         'driver' => array(
             'album_entity' => array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-                'paths' => __DIR__ . '/../src/'.__NAMESPACE__.'/Entity',
+                'paths' => __DIR__ . '/../src/' . __NAMESPACE__ . '/Entity',
             ),
-            'orm_default' => array(
+            'orm_default'  => array(
                 'drivers' => array(
-                    __NAMESPACE__.'\Entity' => 'album_entity',
+                    __NAMESPACE__ . '\Entity' => 'album_entity',
                 )
             )
         )
