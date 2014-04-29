@@ -67,11 +67,12 @@ class AlbumController extends AbstractActionController
     {
         $id = (int)$this->params()->fromRoute('id', 0);
 
-        if(!$id) {
+        $album = $this->albumService->getAlbum($id);
+    
+        if(!$album) {
             return $this->redirect()->toRoute('album');
         }
-        $album = $this->albumService->getAlbum($id);
-
+        
         $form = $this->getServiceLocator()->get('formElementManager')->get('Album\Form\Album');
         $form->get('submit')->setAttribute('value', 'Edit');
 
