@@ -103,7 +103,7 @@ return array(
 Create both databases
 
 Run this command line to generate tables :
-`php public index.php orm:schema-tool:update --force`
+`php public/index.php orm:schema-tool:update --force`
 
 And here the code for configure factories in you application Module.php file :
 ```php
