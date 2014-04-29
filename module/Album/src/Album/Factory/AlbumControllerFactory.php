@@ -2,6 +2,7 @@
 
 /**
  * @package Album
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
  * @author Florent Blaison <florent.blaison@gmail.com>
  */
 
@@ -14,7 +15,6 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 class AlbumControllerFactory implements FactoryInterface
 {
-
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $parentLocator = $serviceLocator->getServiceLocator();

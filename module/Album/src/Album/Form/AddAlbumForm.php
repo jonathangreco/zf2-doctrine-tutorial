@@ -3,6 +3,7 @@
  *
  * @package Album
  * @author Florent Blaison <florent.blaison@gmail.com>
+ * @author Florent Blaison <florent.blaison@gmail.com>
  */
 namespace Album\Form;
 

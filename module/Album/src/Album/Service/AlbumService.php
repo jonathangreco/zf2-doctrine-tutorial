@@ -20,6 +20,10 @@ use Album\Entity\Album;
 class AlbumService implements ServiceLocatorAwareInterface
 {
 
+    //un trait depuis php5.4 est en réalité une implémentation de méthodes génériques lorsque l'on implémente une
+    //classe. Ici ServiceLocatorAwareInterface implémente 2 méthodes abstraites, mais qui sont très générique partout
+    //puisqu'elle permettent de récupérer le serviceManager, le trait fait cela pour nous.
+    //Et le code reste qu'a un seul endroit.
     use ServiceLocatorAwareTrait;
 
     /**
@@ -37,24 +41,41 @@ class AlbumService implements ServiceLocatorAwareInterface
         $this->em = $em;
     }
 
+    /**
+     * @param  null
+     * @return  collection of Album
+     */ 
     public function getAll()
     {
     	return $this->em->getRepository('Album\Entity\Album')->findAll();
     }
 
+    /**
+     * @param   $id | int 
+     * @return  Instance of ALbum
+     */ 
     public function getAlbum($id)
     {
         return $this->em->getRepository('Album\Entity\Album')->find($id);
 
     }
 
+    /**
+     * @param   $album Instance of Album
+     * Save album into Database
+     */ 
     public function addAlbum(Album $album)
     {
         $this->em->persist($album);
         $this->em->flush($album);
     }
 
-    public function saveAlbum(Album $album)
+    /**
+     * @param   $album Instance of Album
+     * @return  Exception if id is null
+     * update Album
+     */
+    public function updateAlbum(Album $album)
     {
     	$connect = $this->em->getConnection();
 
@@ -62,7 +83,6 @@ class AlbumService implements ServiceLocatorAwareInterface
             'artist' => $album->getArtist(),
             'title'  => $album->getTitle(),
         );
-
         $id = (int)$album->getId();
         if ($id == 0) {
             $connect->insert('Album', $data);
@@ -75,75 +95,12 @@ class AlbumService implements ServiceLocatorAwareInterface
         }
     }
 
+    /**
+     * @param  $id Id of album to delete
+     */ 
     public function deleteAlbum($id)
     {
     	$connect = $this->em->getConnection();
         $connect->delete('Album',array('id' => $id));
-    }
-
-    public function exchangeArray($data)
-    {
-        $this->id     = (isset($data['id'])) ? $data['id'] : null;
-        $this->artist = (isset($data['artist'])) ? $data['artist'] : null;
-        $this->title  = (isset($data['title'])) ? $data['title'] : null;
-    }
-
-    public function getInputFilter()
-    {
-        if (!$this->inputFilter) {
-            $inputFilter = new InputFilter();
-
-            $factory = new InputFactory();
-
-            $inputFilter->add($factory->createInput(array(
-                        'name' => 'id',
-                        'required' => true,
-                        'filters' => array(
-                            array('name' => 'Int'),
-                        ),
-                    )));
-
-            $inputFilter->add($factory->createInput(array(
-                        'name' => 'artist',
-                        'required' => true,
-                        'filters' => array(
-                            array('name' => 'StripTags'),
-                            array('name' => 'StringTrim'),
-                        ),
-                        'validators' => array(
-                            array(
-                                'name' => 'StringLength',
-                                'options' => array(
-                                    'encoding' => 'UTF-8',
-                                    'min' => 1,
-                                    'max' => 100,
-                                ),
-                            ),
-                        ),
-                    )));
-
-            $inputFilter->add($factory->createInput(array(
-                        'name' => 'title',
-                        'required' => true,
-                        'filters' => array(
-                            array('name' => 'StripTags'),
-                            array('name' => 'StringTrim'),
-                        ),
-                        'validators' => array(
-                            array(
-                                'name' => 'StringLength',
-                                'options' => array(
-                                    'encoding' => 'UTF-8',
-                                    'min' => 1,
-                                    'max' => 100,
-                                ),
-                            ),
-                        ),
-                    )));
-
-            $this->inputFilter = $inputFilter;
-        }
-
-        return $this->inputFilter;
     }
 }

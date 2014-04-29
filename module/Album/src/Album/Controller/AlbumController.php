@@ -66,46 +66,35 @@ class AlbumController extends AbstractActionController
     public function editAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
-        if (!$id) {
-            return $this->redirect()->toRoute(
-                'album',
-                array(
-                    'action' => 'add'
-                )
-            );
-        }
-        // On va chercher l'album concerné par la demande de modif
-        // s'il n'est pas trouvé une exception est levé et redirigé sur l'accueil
-        try {
-            $album = $this->albumService->getAlbum($id);
-        } catch (\Exception $ex) {
-            return $this->redirect()->toRoute(
-                'album',
-                array(
-                    'action' => 'index'
-                )
-            );
-        }
-        $form = new AlbumForm();
-        $form->bind($album);
-        $form->get('submit')->setAttribute('value', 'Edit');
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $form->setInputFilter($this->albumService->getInputFilter());
-            $form->setData($request->getPost());
-            if ($form->isValid()) {
-                $this->albumService->saveAlbum($album);
 
+        if(!$id) {
+            return $this->redirect()->toRoute('album');
+        }
+        $album = $this->albumService->getAlbum($id);
+
+        $form = $this->getServiceLocator()->get('formElementManager')->get('Album\Form\AddAlbum');
+        $form->get('submit')->setAttribute('value', 'Edit');
+
+        $form->bind($album);
+
+        $request = $this->getRequest();
+
+        if($request->isPost()) {
+            $data = $request->getPost();
+            $form->setData($data);
+
+            if ($form->isValid()) {
+                $album = $form->getData();
+                $this->albumService->updateAlbum($album);
+                // Redirect to list of albums
                 return $this->redirect()->toRoute('album');
             }
         }
+        return new ViewModel(array(
+            'form' => $form,
+            'id' => $id
+        ));
 
-        return new ViewModel(
-            array(
-                'id'   => $id,
-                'form' => $form,
-            )
-        );
     }
 
     public function deleteAction()

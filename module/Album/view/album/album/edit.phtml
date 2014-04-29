@@ -1,25 +1,28 @@
 <?php
  // module/Album/view/album/album/edit.phtml:
 
- $title = 'Edit album';
+ $title = $this->translate('Edit album');
  $this->headTitle($title);
  ?>
- <h1><?php echo $this->escapeHtml($title); ?></h1>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
 
- <?php
- $form = $this->form;
- $form->setAttribute('action', $this->url(
-     'album',
-     array(
-         'action' => 'edit',
-         'id'     => $this->id,
-     )
- ));
- $form->prepare();
+<?php
+$form = $this->form;
 
- echo $this->form()->openTag($form);
- echo $this->formHidden($form->get('id'));
- echo $this->formRow($form->get('title'));
- echo $this->formRow($form->get('artist'));
- echo $this->formSubmit($form->get('submit'));
- echo $this->form()->closeTag();
+$post = $this->form->get('album');
+$form->setAttribute('action', $this->url(
+    'album',
+    array(
+        'action' => 'edit',
+        'id'     => $this->id,
+    )
+));
+$form->prepare();
+
+
+echo $this->form()->openTag($form);
+echo $this->formRow($post->get('title'));
+echo $this->formRow($post->get('artist'));
+echo $this->formSubmit($this->form->get('submit'));
+echo $this->formHidden($this->form->get('add_album_csrf'));
+echo $this->form()->closeTag();

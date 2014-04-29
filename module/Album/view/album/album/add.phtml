@@ -1,15 +1,16 @@
 <?php
 // module/Album/view/album/album/add.phtml:
 
-$title = 'Add new album';
+$title = $this->translate('Add new album');
 $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 <?php
-$this->form->setAttribute('action', $this->url('album', array('action' => 'add')));
-$this->form->prepare();
+$form = $this->form;
+$form->setAttribute('action', $this->url('album', array('action' => 'add')));
+$form->prepare();
 
-echo $this->form()->openTag($this->form);
+echo $this->form()->openTag($form);
 //Ceci est un view helper pour afficher le formulaire
-echo $this->formCollection($this->form);
+echo $this->formCollection($form);
 echo $this->form()->closeTag();

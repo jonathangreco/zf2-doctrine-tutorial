@@ -2,13 +2,14 @@
 
 /**
  * @package Album
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
  * @author Florent Blaison <florent.blaison@gmail.com>
  */
 namespace Album\Form\Fieldset;
 
 use Album\Entity\Album;
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
-use DoctrineModule\Persistence\ProvidesObjectManager;
+use DoctrineModule\Persistence\ProvidesObjectManager as ProvidesObjectManagerTrait ;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
@@ -17,7 +18,11 @@ class AlbumFieldset extends Fieldset implements
     ObjectManagerAwareInterface,
     InputFilterProviderInterface
 {
-    use ProvidesObjectManager;
+    //un trait depuis php5.4 est en réalité une implémentation de méthodes génériques lorsque l'on implémente une
+    //classe. Ici ProvidesObjectManagerTrait implémente 2 méthodes abstraites, mais qui sont très générique partout
+    //puisqu'elle permettent de récupérer l'objectManager, le trait fait cela pour nous.
+    //Et le code reste qu'a un seul endroit.
+    use ProvidesObjectManagerTrait;
 
     public function init()
     {
@@ -27,13 +32,15 @@ class AlbumFieldset extends Fieldset implements
         $this->add(
             array(
                 'name' => 'id',
-                'type' => 'Hidden',
+                'attributes' => array(
+                    'type' => 'hidden'
+                )
             )
         );
         $this->add(
             array(
                 'name'    => 'title',
-                'type'    => 'Text',
+                'type' => 'Zend\Form\Element\Text',
                 'options' => array(
                     'label' => 'Title',
                 ),
@@ -42,7 +49,7 @@ class AlbumFieldset extends Fieldset implements
         $this->add(
             array(
                 'name'    => 'artist',
-                'type'    => 'Text',
+                'type' => 'Zend\Form\Element\Text',
                 'options' => array(
                     'label' => 'Artist',
                 ),
@@ -51,13 +58,13 @@ class AlbumFieldset extends Fieldset implements
     }
 
     /**
-     *
+     * Set requirements for validation 
      * @return array
      */
     public function getInputFilterSpecification()
     {
         return array(
-            'id'     => array(
+            'id' => array(
                 'required' => true,
                 'filters'  => array(
                     array('name' => 'Int'),

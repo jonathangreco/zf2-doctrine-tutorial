@@ -32,41 +32,10 @@ class AlbumServiceTest extends TestCase
 	{
 		$album = new Album();
 
-		$this->assertNull($album->artist, '"artist" should initially be null');
-		$this->assertNull($album->id, '"id" should initially be null');
-        $this->assertNull($album->title, '"title" should initially be null');
+		$this->assertNull($album->getArtist(), '"artist" should initially be null');
+		$this->assertNull($album->getId(), '"id" should initially be null');
+        $this->assertNull($album->getTitle(), '"title" should initially be null');
 	}
-
-    /**
-     * On vérifie que si l'id n'existe pas on ai bien une erreur
-     */ 
-    public function testExchangeArraySetsPropertiesCorrectly()
-    {
-        $album = new Album();
-        $data  = array('artist' => 'some artist',
-                       'id'     => 123,
-                       'title'  => 'some title');
-
-        $album->exchangeArray($data);
-
-        $this->assertSame($data['artist'], $album->artist, '"artist" was not set correctly');
-        $this->assertSame($data['id'], $album->id, '"id" was not set correctly');
-        $this->assertSame($data['title'], $album->title, '"title" was not set correctly');
-    }
-
-    public function testExchangeArraySetsPropertiesToNullIfKeysAreNotPresent()
-    {
-        $album = new Album();
-
-        $album->exchangeArray(array('artist' => 'some artist',
-                                    'id'     => 123,
-                                    'title'  => 'some title'));
-        $album->exchangeArray(array());
-
-        $this->assertNull($album->artist, '"artist" should have defaulted to null');
-        $this->assertNull($album->id, '"id" should have defaulted to null');
-        $this->assertNull($album->title, '"title" should have defaulted to null');
-    }
 
 	 /**
      * Le test créée un mock de la table Album on essaye d'y récupérer les album par le mock

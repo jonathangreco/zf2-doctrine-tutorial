@@ -1,7 +1,7 @@
 <?php
 /**
  * @package Application
- * @author Jonathan Greco <nataniel.greco@gmail.com>
+ * @author Jonathan Greco <jgreco@docsourcing.com>
  */
 
 namespace Application;
@@ -48,6 +48,18 @@ return array(
                     ),
                 ),
             ),
+            'changelocale' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/changelocale[/:locale[/:redirecturl]]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Translator',
+                        'action' => 'changelocale',
+                        'locale' => '',
+                        'redirecturl' => ''
+                    )
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
@@ -60,6 +72,7 @@ return array(
         ),
         'factories' => array(
             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+            'translate' => 'Zend\I18n\Translator\TranslatorServiceFactory',
         ),
     ),
     'translator' => array(
@@ -74,7 +87,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\Translator' => 'Application\Controller\TranslatorController'
         ),
     ),
     'view_manager' => array(

@@ -32,6 +32,16 @@ return array(
             ),
         ),
     ),
+    'translator' => array(
+        'locale' => 'en_US',
+        'translation_file_patterns' => array(
+            array(
+                'type'     => 'gettext',
+                'base_dir' => __DIR__ . '/../language',
+                'pattern'  => '%s.mo',
+            ),
+        ),
+    ),
     'service_manager' => array(
         'factories' => array(
             'Album\Service\Album' => 'Album\Factory\AlbumServiceFactory',
@@ -47,8 +57,7 @@ return array(
     ),
     'form_elements'   => array(
         'invokables' => array(
-            'Album\Form\Album'    => 'Album\Form\AlbumForm',
-            'Album\Form\AddAlbum' => 'Album\Form\AddAlbumForm',
+            'Album\Form\AddAlbum' => 'Album\Form\AlbumForm',
         ),
     ),
     'doctrine'        => array(

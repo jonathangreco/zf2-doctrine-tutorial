@@ -14,7 +14,8 @@
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
                         ->prependStylesheet($this->basePath() . '/css/style.css')
                         ->prependStylesheet($this->basePath() . '/css/bootstrap-theme.min.css')
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
+                        ->prependStylesheet($this->basePath() . '/css/fam-icons.css')
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css'); ?>
 
         <!-- Scripts -->
         <?php echo $this->headScript()
@@ -37,11 +38,48 @@
                     <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img src="<?php echo $this->basePath('img/zf2-logo.png') ?>" alt="Zend Framework 2"/>&nbsp;<?php echo $this->translate('Skeleton Application') ?></a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <?php echo $this->navigation('navigation')->menu()->setUlClass('nav navbar-nav'); ?>
+                    <?php echo $this->navigation('navigation')->menu()->setUlClass('nav navbar-nav')?>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <?php 
+                                    //On gère ici l'affichage des langue dans la navigation on change la 
+                                    //couleur du drapeau selon la langue
+                                    if($this->navigation()->getTranslator()->getLocale() == 'fr_FR')
+                                    {
+                                        echo '<span class="flag fr"></span> FR <span class="caret"></span>';
+                                    } else {
+                                        echo '<span class="flag gb"></span> GB <span class="caret"></span>';
+                                    }
+                                ?>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href='<?php echo $this->url('changelocale', array('locale'=>'fr_FR', 'redirecturl'=>urlencode($this->absoluteUrl()))); ?>'>
+                                    <span class="flag fr"></span> Français
+                                </a></li>
+                                <li><a href='<?php echo $this->url('changelocale', array('locale'=>'en_US', 'redirecturl'=>urlencode($this->absoluteUrl()))); ?>'>
+                                    <span class="flag gb"></span> English
+                                </a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
         <div class="container">
+            <?php 
+                /**
+                 * Affiche une heure formatée selon la langue
+                 */ 
+               /* echo $this->dateFormat(
+                    new DateTime(),
+                    IntlDateFormatter::LONG, // date
+                    IntlDateFormatter::SHORT, // time
+                    $this->navigation()->getTranslator()->getLocale()
+                );*/
+            ?>
+            <?php echo $this->navigation('navigation')->breadcrumbs()->setMinDepth(0); ?>
             <?php echo $this->content; ?>
             <hr>
             <footer>
