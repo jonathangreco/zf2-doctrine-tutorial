@@ -41,7 +41,7 @@ class AlbumController extends AbstractActionController
     public function addAction()
     {
         /** @var AddAlbumForm $form */
-        $form = $this->getServiceLocator()->get('formElementManager')->get('Album\Form\AddAlbum');
+        $form = $this->getServiceLocator()->get('formElementManager')->get('Album\Form\Album');
         $request = $this->getRequest();
 
         if ($request->isPost()) {
@@ -72,7 +72,7 @@ class AlbumController extends AbstractActionController
         }
         $album = $this->albumService->getAlbum($id);
 
-        $form = $this->getServiceLocator()->get('formElementManager')->get('Album\Form\AddAlbum');
+        $form = $this->getServiceLocator()->get('formElementManager')->get('Album\Form\Album');
         $form->get('submit')->setAttribute('value', 'Edit');
 
         $form->bind($album);

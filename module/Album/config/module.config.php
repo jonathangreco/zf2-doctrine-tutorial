@@ -57,7 +57,7 @@ return array(
     ),
     'form_elements'   => array(
         'invokables' => array(
-            'Album\Form\AddAlbum' => 'Album\Form\AlbumForm',
+            'Album\Form\Album' => 'Album\Form\AlbumForm',
         ),
     ),
     'doctrine'        => array(
