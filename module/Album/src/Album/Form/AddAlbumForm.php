@@ -1,15 +1,13 @@
 <?php
 /**
- *
  * @package Album
- * @author Jonathan Greco <nataniel.greco@gmail.com>
  * @author Florent Blaison <florent.blaison@gmail.com>
  */
 namespace Album\Form;
 
 use Zend\Form\Form;
 
-class AlbumForm extends Form
+class AddAlbumForm extends Form
 {
     /**
      * Permet la configuration du formulaire d'ajout ou de modification des Album
@@ -52,9 +50,9 @@ class AlbumForm extends Form
             array(
                 'name'       => 'submit',                
                 'attributes' => array(
-                    'type'       => 'Submit',
-                    'value' => 'Add',
-                    'id'    => 'submitbutton',
+                    'type'   => 'Submit',
+                    'value'  => 'Add',
+                    'id'     => 'submitbutton',
                 ),
             )
         );
