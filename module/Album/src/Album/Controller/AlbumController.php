@@ -63,16 +63,19 @@ class AlbumController extends AbstractActionController
         );
     }
 
+    /**
+     * Editer un album
+     */ 
     public function editAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
-
+        
         $album = $this->albumService->getAlbum($id);
-    
+
         if(!$album) {
             return $this->redirect()->toRoute('album');
         }
-        
+
         $form = $this->getServiceLocator()->get('formElementManager')->get('Album\Form\Album');
         $form->get('submit')->setAttribute('value', 'Edit');
 
@@ -98,10 +101,15 @@ class AlbumController extends AbstractActionController
 
     }
 
+    /**
+     * Suppression d'un album
+     */ 
     public function deleteAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
-        if (!$id) {
+
+        $album = $this->albumService->getAlbum($id);
+        if (!$album) {
             return $this->redirect()->toRoute('album');
         }
 
@@ -110,8 +118,7 @@ class AlbumController extends AbstractActionController
             $del = $request->getPost('del', 'No');
 
             if ($del == 'Yes') {
-                $id = (int)$request->getPost('id');
-                $this->albumService->deleteAlbum($id);
+                $this->albumService->deleteAlbum($album);
             }
 
             // Redirect to list of albums
