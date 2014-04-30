@@ -32,7 +32,7 @@ class EditAlbumForm extends Form
         $this->add(
             array(
                 'type' => 'Zend\Form\Element\Csrf',
-                'name' => 'add_album_csrf',
+                'name' => 'edit_album_csrf',
             )
         );
 
@@ -42,7 +42,7 @@ class EditAlbumForm extends Form
                     'title',
                     'artist',
                 ),
-                'add_album_csrf',
+                'edit__album_csrf',
             )
         );
 
@@ -51,7 +51,7 @@ class EditAlbumForm extends Form
                 'name'       => 'submit',                
                 'attributes' => array(
                     'type'   => 'Submit',
-                    'value'  => 'Add',
+                    'value'  => 'Edit',
                     'id'     => 'submitbutton',
                 ),
             )
