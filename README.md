@@ -1,5 +1,5 @@
-ZendSkeletonApplication + Doctrine + Jenkins Config + MultipleDB
-================================================================
+Skeleton & Doctrine & Jenkins CI & MultipleDB & Translation
+===========================================================
 
 Introduction
 ------------
