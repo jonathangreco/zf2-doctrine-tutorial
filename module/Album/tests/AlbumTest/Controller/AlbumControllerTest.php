@@ -67,8 +67,8 @@ class AlbumControllerTest extends AbstractHttpControllerTestCase {
             'discs' => 1
         );
         $this->dispatch('/album/add', HttpRequest::METHOD_POST, $post);
-
-        $this->assertQueryContentContains('form ul li', "Value is required and can't be empty");
+        $this->assertQuery('form p');
+        $this->assertNotQuery('form ul li');
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('Album');
         $this->assertControllerName('Album\Controller\Album');
@@ -100,7 +100,8 @@ class AlbumControllerTest extends AbstractHttpControllerTestCase {
         );
         $this->dispatch('/album/edit/2', HttpRequest::METHOD_POST, $post);
 
-        $this->assertQueryContentContains('form ul li', "Value is required and can't be empty");
+        $this->assertQuery('form p');
+        $this->assertNotQuery('form ul li');
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('Album');
         $this->assertControllerName('Album\Controller\Album');
