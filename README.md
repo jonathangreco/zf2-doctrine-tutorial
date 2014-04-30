@@ -139,6 +139,11 @@ OR :
 $this->em = $this->getServiceManager()->get('doctrine.entitymanager.other_DB');
 
 ```
+Translation
+-----------
+This skeleton can handle translation in french to english (or more depends to you) with session(feel free to modify this with route if you prefer).
+So, don't forget to download PoEdit software for translate all your module.
+This skeleton also translate your forms. zf2 will be translate all your labels using those methodes : formSubmit, formLabel and formElement and make sure that your string are translated.
 
 PHPunit & Jenkins
 -----------------
