@@ -3,8 +3,12 @@ ZendSkeletonApplication + Doctrine + Jenkins Config + MultipleDB
 
 Introduction
 ------------
-This is a Zf2 Skeleton application with Doctrine and multiple database implementation (2 Entity Manager), this skelton use also Jenkins for CI.
+This is a Zf2 Skeleton application with Doctrine and multiple database implementation (2 Entity Manager), this skelton use also Jenkins for CI. And translation FR to GB(or more if you want).
 Unit tests are centralize in phpunit.xml on tests root directory. Feel free to fork this skeleton :)
+
+The aim of this skeleton is to provide a good start for a complex project and provide more functionalities than the original getting started.
+
+If you have a question, an idea, or even a correction to make to this project feel free to make a PR. This repo is far from perfect. Enjoy with it anyway :)
 
 Installation
 ------------
