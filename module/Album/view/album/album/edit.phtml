@@ -18,11 +18,27 @@ $form->setAttribute('action', $this->url(
     )
 ));
 $form->prepare();
-
-
 echo $this->form()->openTag($form);
-echo $this->formRow($post->get('title'));
-echo $this->formRow($post->get('artist'));
-echo $this->formSubmit($this->form->get('submit'));
+
+foreach ($form->get('album') as $element) : ?>
+	<div style="width: 330px;" class="form-group <?php if ($this->formElementErrors($element)) echo "has-error" ?>">
+        <label class="control-label"><?php echo $element->getLabel() ?></label>
+        <?php
+        $element->setAttribute('class', 'form-control')
+                ->setAttribute('placeholder', $element->getLabel());
+        echo $this->formElement($element);
+        if ($this->formElementErrors($element)) : ?>
+            <?php
+            echo $this->formElementErrors()
+                ->setMessageOpenFormat('<p class="help-block">')
+                ->setMessageSeparatorString('</p><p class="help-block">')
+                ->setMessageCloseString('</p>')
+                ->render($element);
+            ?>
+        <?php endif; ?>
+    </div>
+<?php
+endforeach;
+echo $this->formSubmit($form->get('submit')->setAttribute('class', 'btn btn-success'));
 echo $this->formHidden($this->form->get('edit_album_csrf'));
-echo $this->form()->closeTag();
+echo $this->form()->closeTag() ?>
