@@ -24,5 +24,5 @@ echo $this->form()->openTag($form);
 echo $this->formRow($post->get('title'));
 echo $this->formRow($post->get('artist'));
 echo $this->formSubmit($this->form->get('submit'));
-echo $this->formHidden($this->form->get('add_album_csrf'));
+echo $this->formHidden($this->form->get('edit_album_csrf'));
 echo $this->form()->closeTag();
