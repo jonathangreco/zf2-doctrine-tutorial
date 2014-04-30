@@ -83,6 +83,11 @@ return array(
                 'base_dir' => __DIR__ . '/../language',
                 'pattern'  => '%s.mo',
             ),
+            array(
+                'type' => 'phpArray',
+                'base_dir' => './vendor/zendframework/zendframework/resources/languages/',
+                'pattern'  => 'fr/Zend_Validate.php',
+            ),
         ),
     ),
     'controllers' => array(
