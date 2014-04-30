@@ -7,34 +7,50 @@ $this->headTitle($title);
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 <?php
 $form = $this->form;
+$album = $this->form->get('album');
 $form->setAttribute('action', $this->url('album', array('action' => 'add')));
+$form->setAttribute('method', 'post');
+
 $form->prepare();
-$this->translate('Add');
-
 echo $this->form()->openTag($form);
-
-foreach ($form->get('album') as $element) : ?>
-	<div style="width: 330px;" class="form-group <?php if ($this->formElementErrors($element)) echo "has-error" ?>">
-        <label class="control-label"><?php echo $element->getLabel() ?></label>
+?>
+    <div style="width: 330px;" class="form-group <?php if ($this->formElementErrors($album->get('title'))) echo "has-error" ?>">
+        <label class="control-label"><?php echo $this->formLabel($album->get('title')) ?></label>
         <?php
-        $element->setAttribute('class', 'form-control')
-                ->setAttribute('placeholder', $element->getLabel());
+        $album  ->get('title')
+                ->setAttribute('class', 'form-control')
+                ->setAttribute('placeholder', 'Title');
 
-           
-
-        echo $this->formElement($element);
-        if ($this->formElementErrors($element)) : ?>
+        echo $this->formElement($album->get('title'));
+        if ($this->formElementErrors($album->get('title'))) : ?>
             <?php
             echo $this->formElementErrors()
                 ->setMessageOpenFormat('<p class="help-block">')
                 ->setMessageSeparatorString('</p><p class="help-block">')
                 ->setMessageCloseString('</p>')
-                ->render($element);
+                ->render($album->get('title'));
+            ?>
+        <?php endif; ?>
+    </div>
+    <div style="width: 330px;" class="form-group <?php if ($this->formElementErrors($album->get('artist'))) echo "has-error" ?>">
+        <label class="control-label"><?php echo $this->formLabel($album->get('artist')) ?></label>
+        <?php
+        $album  ->get('artist')
+                ->setAttribute('class', 'form-control')
+                ->setAttribute('placeholder', 'Artist');
+                
+        echo $this->formElement($album->get('artist'));
+        if ($this->formElementErrors($album->get('artist'))) : ?>
+            <?php
+            echo $this->formElementErrors()
+                ->setMessageOpenFormat('<p class="help-block">')
+                ->setMessageSeparatorString('</p><p class="help-block">')
+                ->setMessageCloseString('</p>')
+                ->render($album->get('artist'));
             ?>
         <?php endif; ?>
     </div>
 <?php
-endforeach;
 echo $this->formSubmit($form->get('submit')->setAttribute('class', 'btn btn-success'));
 echo $this->formHidden($this->form->get('add_album_csrf'));
 echo $this->form()->closeTag() ?>
