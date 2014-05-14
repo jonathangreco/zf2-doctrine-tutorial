@@ -157,7 +157,19 @@ In command line run :
 `phpunit`
 
 Don't forget to add in boostrapp.php all require for each module you have.
-
+You have to edit also the build.xml file for configuring all of your plugin in on jenkins. Full path for your project
+has to be edit : 
+```xml
+<project name="other_project" default="main">
+    <property name="basedir" value="c:/wamp/www/other_project/" /><!-- here -->
+    <!-- ... -->
+    
+    <target name="phpunit" description="Lancement des tests unitaires">
+        <echo msg="Start Unit testing" />
+        <exec command="phpunit.bat --configuration=C:/wamp/www/other_project/tests/phpunit.xml"/><!-- and here -->
+    </target>
+    <!-- ... -->
+```
 How works Units tests on this Skeleton ?
 --------------------------------------
 
