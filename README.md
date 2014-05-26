@@ -3,7 +3,7 @@ Skeleton & Doctrine & Jenkins CI & MultipleDB & Translation
 
 Introduction
 ------------
-This is a Zf2 Skeleton application with Doctrine and multiple database implementation (2 Entity Manager), this skelton use also Jenkins for CI. And translation FR to GB(or more if you want).
+This is a Zf2 Skeleton application with Doctrine and multiple database implementation (2 Entity Manager), this skelton use also Jenkins for CI. And translation fr_FR to en_US(or more if you want).
 Unit tests are centralize in phpunit.xml on tests root directory. Feel free to fork this skeleton :)
 
 The aim of this skeleton is to provide a good start for a complex project and provide more functionalities than the original getting started.
