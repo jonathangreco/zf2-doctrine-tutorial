@@ -9,13 +9,14 @@ $this->headTitle($title);
 <p>
     <a href="<?php echo $this->url('album/default', array('controller'=>'album', 'action'=>'add'));?>"><i class="fam-add" title="<?php echo $this->translate('Add');?>"></i><?php echo $this->translate('Add new album');?></a>
 </p>
-
-<table class="table">
-<tr>
-    <th><?php echo $this->translate('Title');?></th>
-    <th><?php echo $this->translate('Artist');?></th>
-    <th><?php echo $this->translate('Action');?></th>
-</tr>
+<table class="table table-striped">
+<thead>
+    <tr>
+        <th><?php echo $this->translate('Title');?></th>
+        <th><?php echo $this->translate('Artist');?></th>
+        <th><?php echo $this->translate('Action');?></th>
+    </tr>
+</thead>
 <?php foreach ($paginator as $album) : ?>
 <tr>
     <td><?php echo $this->escapeHtml($album->getTitle());?></td>
@@ -31,4 +32,4 @@ $this->headTitle($title);
 </table>
 <?php
 ?>
-<?php echo $this->paginationControl($paginator, 'sliding', 'album/album/page_helper', array('route' => 'album/page')); ?>
+<?php echo $this->paginationControl($paginator, 'Sliding', 'album/album/page_helper', array('route' => 'album/page')); ?>

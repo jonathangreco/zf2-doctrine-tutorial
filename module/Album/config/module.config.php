@@ -46,7 +46,7 @@ return array(
                             'defaults'    => array(
                                 'controller' => 'Album\Controller\Album',
                                 'action'     => 'index',
-                                'page'      =>1
+                                'page'      => 1
                             ),
                         ),
                     ),

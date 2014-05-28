@@ -8,8 +8,9 @@ $this->headTitle($title);
 $form = $this->form;
 $album = $this->form->get('album');
 $form->setAttribute('action', $this->url(
-    'album',
+    'album/default',
     array(
+        'controller'=>'album',
         'action' => 'edit',
         'id'     => $this->id,
     )

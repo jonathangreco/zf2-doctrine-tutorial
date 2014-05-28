@@ -32,37 +32,21 @@ class AlbumController extends AbstractActionController
         $this->albumService = $albumService;
     }
 
-    /**
-     * Page d'index du module
-     * route /album
-     * Affiche tous les albums
-     */ 
-    /*public function indexAction()
-    {
-        $albums = $this->albumService->getAll();
-
-        return new ViewModel(
-            array(
-                'albums' => $albums,
-            )
-        );
-    }*/
-
-
     public function indexAction()
     {
-       $view =  new ViewModel();
-   
-       $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-       $repository = $entityManager->getRepository('Album\Entity\Album');
-       $adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('albums')));
-       $paginator = new Paginator($adapter);
-       $paginator->setDefaultItemCountPerPage(10);
-       $page = (int)$this->params()->fromRoute('page');
-       if($page) $paginator->setCurrentPageNumber($page);
-       $view->setVariable('paginator',$paginator);
+        $view =  new ViewModel();
 
-       return $view;
+        $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        $repository = $entityManager->getRepository('Album\Entity\Album');
+        $adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('albums')));
+        $paginator = new Paginator($adapter);
+        $paginator->setDefaultItemCountPerPage(10);
+        $page = (int)$this->params()->fromRoute('page');
+        if($page) $paginator->setCurrentPageNumber($page);
+
+        $view->setVariable('paginator',$paginator);
+
+        return $view;
     }
 
     /**
@@ -140,9 +124,8 @@ class AlbumController extends AbstractActionController
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $del = $request->getPost('del', 'No');
-
-            if ($del == 'Yes') {
+            $del = $request->getPost('response', 'no');
+            if ($del == 'yes') {
                 $this->albumService->deleteAlbum($album);
             }
 
@@ -153,7 +136,7 @@ class AlbumController extends AbstractActionController
         return new ViewModel(
             array(
                 'id'    => $id,
-                'album' => $this->albumService->getAlbum($id)
+                'album' => $album
             )
         );
     }

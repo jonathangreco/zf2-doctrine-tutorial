@@ -11,15 +11,32 @@
      '<?php echo $this->escapeHtml($this->album->getArtist()); ?>'?
  </p>
  <?php
- $url = $this->url('album', array(
+ $url = $this->url('album/default', array(
+ 	 'controller'=>'album',
      'action' => 'delete',
      'id'     => $this->id,
  ));
  ?>
+
  <form action="<?php echo $url; ?>" method="post">
  <div>
      <input type="hidden" name="id" value="<?php echo $this->album->getId(); ?>" />
-     <input type="submit" name="del" value="<?php echo $this->translate('Yes');?>" />
-     <input type="submit" name="del" value="<?php echo $this->translate('No');?>" />
+     <input type="hidden" id="response" name="response" value="" />
+     <input type="button" id="yes" name="del" value="<?php echo $this->translate('Yes');?>" onclick='makeDecision("yes", $(this), "no")'/>
+     <input type="button" id="no" name="del" value="<?php echo $this->translate('No');?>"  onclick='makeDecision("no",$(this), "yes")'/>
+     <div class="margin-top-5">
+     	<input type="submit" id="confirm" value="<?php echo $this->translate('confirm');?>" disabled="disabled"/>
+     </div>
  </div>
  </form>
+
+<script type="text/javascript">
+	function makeDecision(decision, from, toEnable)
+	{
+		var toDisable = from.attr('id');
+		$("#response").attr("value", decision);
+		$("#"+toDisable).attr("disabled","disabled");
+		$("#"+toEnable).removeAttr("disabled");
+		$("#confirm").removeAttr("disabled");
+	}
+</script>
