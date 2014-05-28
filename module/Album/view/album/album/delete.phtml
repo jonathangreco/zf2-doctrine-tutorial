@@ -19,7 +19,7 @@
  <form action="<?php echo $url; ?>" method="post">
  <div>
      <input type="hidden" name="id" value="<?php echo $this->album->getId(); ?>" />
-     <input type="submit" name="del" value="Yes" />
-     <input type="submit" name="del" value="No" />
+     <input type="submit" name="del" value="<?php echo $this->translate('Yes');?>" />
+     <input type="submit" name="del" value="<?php echo $this->translate('No');?>" />
  </div>
  </form>

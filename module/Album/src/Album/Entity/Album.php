@@ -1,10 +1,14 @@
 <?php
 /**
  * Classe représentant l'entité Album avec Doctrine
+ * Une entité ne dois contenir que :
+ * les propriété de la table 
+ * les getters
+ * les setters
+ * Et rien d'autre
  * 
  * @package Album
- * @author Jonathan Greco <nataniel.greco@gmail.com>
- * @author Florent Blaison <florent.blaison@gmail.com>
+ * @author Jonathan Greco <jgreco@docsourcing.com>
  */
 
 namespace Album\Entity;
@@ -16,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="Album")
  */
 class Album
-{	
+{    
     /**
      * @var int|null
      *
@@ -29,12 +33,12 @@ class Album
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string", length=48, unique=false)
+     * @ORM\Column(type="string", length=100, unique=false)
      */
     private $artist;
 
     /**
- 	 * @ORM\Column(type="string", length=48, unique=false)
+      * @ORM\Column(type="string", length=100, unique=false)
      */
     private $title;
 

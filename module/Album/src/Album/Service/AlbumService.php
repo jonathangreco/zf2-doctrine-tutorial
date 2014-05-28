@@ -3,8 +3,7 @@
 /**
  * Classe permettant les traitements sur la table album
  * @package Album
- * @author Jonathan Greco <nataniel.greco@gmail.com>
- * @author Florent Blaison <florent.blaison@gmail.com>
+ * @author Jonathan Greco <jgreco@docsourcing.com>
  */
 
 namespace Album\Service;
@@ -21,7 +20,7 @@ class AlbumService implements ServiceLocatorAwareInterface
 {
 
     //un trait depuis php5.4 est en réalité une implémentation de méthodes génériques lorsque l'on implémente une
-    //classe. Ici ServiceLocatorAwareInterface implémente 2 méthodes abstraites, mais qui sont très générique partout
+    //classe. Ici ServiceLocatorAwareInterface implémente 2 méthodes, mais qui sont très générique partout
     //puisqu'elle permettent de récupérer le serviceManager, le trait fait cela pour nous.
     //Et le code reste qu'a un seul endroit.
     use ServiceLocatorAwareTrait;
@@ -42,12 +41,11 @@ class AlbumService implements ServiceLocatorAwareInterface
     }
 
     /**
-     * @param  null
      * @return  collection of Album
      */ 
     public function getAll()
     {
-    	return $this->em->getRepository('Album\Entity\Album')->findAll();
+        return $this->em->getRepository('Album\Entity\Album')->findAll();
     }
 
     /**
@@ -72,35 +70,19 @@ class AlbumService implements ServiceLocatorAwareInterface
 
     /**
      * @param   $album Instance of Album
-     * @return  Exception if id is null
      * update Album
      */
     public function updateAlbum(Album $album)
     {
-    	$connect = $this->em->getConnection();
-
-        $data = array(
-            'artist' => $album->getArtist(),
-            'title'  => $album->getTitle(),
-        );
-        $id = (int)$album->getId();
-        if ($id == 0) {
-            $connect->insert('Album', $data);
-        } else {
-            if ($this->getAlbum($id)) {
-                $connect->update('Album', $data, array('id' => $id));
-            } else {
-                throw new \Exception('Form id does not exist');
-            }
-        }
+        $this->em->flush($album);
     }
 
     /**
-     * @param  $id Id of album to delete
+     * @param  $album Instance of Album
      */ 
-    public function deleteAlbum($id)
+    public function deleteAlbum(Album $album)
     {
-    	$connect = $this->em->getConnection();
-        $connect->delete('Album',array('id' => $id));
+        $this->em->remove($album);
+        $this->em->flush($album);
     }
 }

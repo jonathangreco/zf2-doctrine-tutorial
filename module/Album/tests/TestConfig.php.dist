@@ -2,7 +2,7 @@
 /**
  * 
  * @package Album
- * @author Jonathan Greco <nataniel.greco@gmail.com>  
+ * @author Jonathan Greco <jgreco@docsourcing.com>  
  */
 namespace AlbumTest;
 return array(
@@ -11,6 +11,9 @@ return array(
         'DoctrineModule',
         'DoctrineORMModule',
         'Album',
+        'Invoice',
+        'Order',
+        'Item',
     ),
     'module_listener_options' => array(
         'config_glob_paths'    => array(

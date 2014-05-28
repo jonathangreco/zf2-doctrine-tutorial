@@ -1,7 +1,10 @@
 <?php
 /**
+ * Factory permettant d'inhecter une instance de l'object manager doctrine
+ * via le service locator dans le service Album et de retourner une instance 
+ * de AlbumService
  * @package Album
- * @author Florent Blaison <florent.blaison@gmail.com>
+ * @author Jonathan Greco <jgreco@docsourcing.com>
  */
 
 namespace Album\Factory;

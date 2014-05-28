@@ -2,8 +2,8 @@
 /**
  * 
  * @package Album
- * @author Jonathan Greco <nataniel.greco@gmail.com>  
+ * @author Jonathan Greco <jgreco@docsourcing.com>  
  */
 return array(
-	//...
+    //...
 );

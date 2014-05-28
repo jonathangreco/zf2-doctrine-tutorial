@@ -3,10 +3,11 @@
 
 $title = $this->translate('My albums');
 $this->headTitle($title);
+
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 <p>
-    <a href="<?php echo $this->url('album', array('action'=>'add'));?>"><i class="fam-add" title="<?php echo $this->translate('Add new album');?>"></i><?php echo $this->translate('Add new album');?></a>
+    <a href="<?php echo $this->url('album/default', array('controller'=>'album', 'action'=>'add'));?>"><i class="fam-add" title="<?php echo $this->translate('Add');?>"></i><?php echo $this->translate('Add new album');?></a>
 </p>
 
 <table class="table">
@@ -15,16 +16,19 @@ $this->headTitle($title);
     <th><?php echo $this->translate('Artist');?></th>
     <th><?php echo $this->translate('Action');?></th>
 </tr>
-<?php foreach ($albums as $album) : ?>
+<?php foreach ($paginator as $album) : ?>
 <tr>
     <td><?php echo $this->escapeHtml($album->getTitle());?></td>
     <td><?php echo $this->escapeHtml($album->getArtist());?></td>
     <td>
-        <a href="<?php echo $this->url('album',
-            array('action'=>'edit', 'id' => $album->getId()));?>"><i class="fam-pencil" title="<?php echo $this->translate('Edit');?>"></i></a>
-        <a href="<?php echo $this->url('album',
-            array('action'=>'delete', 'id' => $album->getId()));?>"><i class="fam-delete" title="<?php echo $this->translate('Delete');?>"></i></a>
+        <a href="<?php echo $this->url('album/default',
+            array('controller'=>'album','action'=>'edit', 'id' => $album->getId()));?>"><i class="fam-pencil" title="<?php echo $this->translate('Edit');?>"></i></a>
+        <a href="<?php echo $this->url('album/default',
+            array('controller'=>'album','action'=>'delete', 'id' => $album->getId()));?>"><i class="fam-delete" title="<?php echo $this->translate('Delete');?>"></i></a>
     </td>
 </tr>
 <?php endforeach; ?>
 </table>
+<?php
+?>
+<?php echo $this->paginationControl($paginator, 'sliding', 'album/album/page_helper', array('route' => 'album/page')); ?>

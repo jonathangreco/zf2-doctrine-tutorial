@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: album mylink\n"
-"POT-Creation-Date: 2014-04-28 09:41+0100\n"
+"POT-Creation-Date: 2014-05-13 09:29+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../view/album/album/add.phtml:4
+#: ../view/album/album/add.phtml:2 ../view/album/album/index.phtml:10
 msgid "Add new album"
 msgstr "Ajouter un nouvel album"
 
@@ -26,7 +26,15 @@ msgstr "Supprimer l'album"
 msgid "Are you sure that you want to delete"
 msgstr "Etes vous certain de supprimer "
 
-#: ../view/album/album/edit.phtml:4
+#: ../view/album/album/delete.phtml:22
+msgid "Yes"
+msgstr "Oui"
+
+#: ../view/album/album/delete.phtml:23
+msgid "No"
+msgstr "Non"
+
+#: ../view/album/album/edit.phtml:2
 msgid "Edit album"
 msgstr "Editer l'album"
 
@@ -34,10 +42,26 @@ msgstr "Editer l'album"
 msgid "My albums"
 msgstr "Mes albums"
 
-#: ../view/album/album/index.phtml:24
+#: ../view/album/album/index.phtml:10
+msgid "Add"
+msgstr "Ajouter"
+
+#: ../view/album/album/index.phtml:15
+msgid "Title"
+msgstr "Titre"
+
+#: ../view/album/album/index.phtml:16
+msgid "Artist"
+msgstr "Artiste"
+
+#: ../view/album/album/index.phtml:17
+msgid "Action"
+msgstr "Action"
+
+#: ../view/album/album/index.phtml:25
 msgid "Edit"
 msgstr "Editer"
 
-#: ../view/album/album/index.phtml:26
+#: ../view/album/album/index.phtml:27
 msgid "Delete"
 msgstr "Supprimer"

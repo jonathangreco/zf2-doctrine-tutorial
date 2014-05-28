@@ -1,12 +1,13 @@
 <?php
 /**
- *
  * @package Album
- * @author Jonathan Greco <nataniel.greco@gmail.com>
- * @author Florent Blaison <florent.blaison@gmail.com>
+ * @author Jonathan Greco <jgreco@docsourcing.com>
  */
 
 namespace Album\Controller;
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
+use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
+use Zend\Paginator\Paginator;
 
 use Album\Form\AddAlbumForm;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -22,12 +23,21 @@ class AlbumController extends AbstractActionController
      */
     private $albumService;
 
+    /**
+     * AlbumService est injecté en tant que dependance par une factory
+     * cette factory est appelée dans la config
+     */ 
     public function __construct(AlbumService $albumService)
     {
         $this->albumService = $albumService;
     }
 
-    public function indexAction()
+    /**
+     * Page d'index du module
+     * route /album
+     * Affiche tous les albums
+     */ 
+    /*public function indexAction()
     {
         $albums = $this->albumService->getAll();
 
@@ -36,12 +46,32 @@ class AlbumController extends AbstractActionController
                 'albums' => $albums,
             )
         );
+    }*/
+
+
+    public function indexAction()
+    {
+       $view =  new ViewModel();
+   
+       $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+       $repository = $entityManager->getRepository('Album\Entity\Album');
+       $adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('albums')));
+       $paginator = new Paginator($adapter);
+       $paginator->setDefaultItemCountPerPage(10);
+       $page = (int)$this->params()->fromRoute('page');
+       if($page) $paginator->setCurrentPageNumber($page);
+       $view->setVariable('paginator',$paginator);
+
+       return $view;
     }
 
+    /**
+     * Ajout d'un album
+     */ 
     public function addAction()
     {
         /** @var AddAlbumForm $form */
-        $form = $this->getServiceLocator()->get('formElementManager')->get('Album\Form\Album');
+        $form = $this->getServiceLocator()->get('formElementManager')->get('Album\Form\AddAlbum');
         $request = $this->getRequest();
 
         if ($request->isPost()) {
@@ -69,20 +99,15 @@ class AlbumController extends AbstractActionController
     public function editAction()
     {
         $id = (int)$this->params()->fromRoute('id', 0);
-        
         $album = $this->albumService->getAlbum($id);
 
         if(!$album) {
             return $this->redirect()->toRoute('album');
         }
 
-        $form = $this->getServiceLocator()->get('formElementManager')->get('Album\Form\Album');
-        $form->get('submit')->setAttribute('value', 'Edit');
-
+        $form = $this->getServiceLocator()->get('formElementManager')->get('Album\Form\EditAlbum');
         $form->bind($album);
-
         $request = $this->getRequest();
-
         if($request->isPost()) {
             $data = $request->getPost();
             $form->setData($data);

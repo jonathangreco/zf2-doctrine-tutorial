@@ -7,7 +7,7 @@
  * utiliser correctement toutes les méthodes de tests disponibles.
  * 
  * @package Album
- * @author Jonathan Greco <nataniel.greco@gmail.com>  
+ * @author Jonathan Greco <jgreco@docsourcing.com>  
  */
 
 
@@ -19,29 +19,29 @@ use Album\Entity\Album;
 class AlbumServiceTest extends TestCase
 {
 
-	public function setUp()
+    public function setUp()
     {
         $this->em = $this->getEntityManager();
         parent::setUp();
     }
 
     /**
-     * [On vérifie qu'a la déclaration d'un nouel album on est bien les champs vide]
+     * [On vérifie qu'a la déclaration d'un nouvel album on est bien les champs vide]
      */
-	public function testAlbumInitialState()
-	{
-		$album = new Album();
+    public function testAlbumInitialState()
+    {
+        $album = new Album();
 
-		$this->assertNull($album->getArtist(), '"artist" should initially be null');
-		$this->assertNull($album->getId(), '"id" should initially be null');
+        $this->assertNull($album->getArtist(), '"artist" should initially be null');
+        $this->assertNull($album->getId(), '"id" should initially be null');
         $this->assertNull($album->getTitle(), '"title" should initially be null');
-	}
+    }
 
-	 /**
-     * Le test créée un mock de la table Album on essaye d'y récupérer les album par le mock
-     * et tester que l'on obtien bien un array et on teste également que le premier de cet array soit bien
-     * une instance de Album, ceci nous permet de déduire que c'est une collection
-     */
+    /**
+    * Le test créée un mock de la table Album on essaye d'y récupérer les album par le mock
+    * et tester que l'on obtien bien un array et on teste également que le premier de cet array soit bien
+    * une instance de Album, ceci nous permet de déduire que c'est une collection
+    */
     public function testCanFetchAllAlbum()
     {
         //On fait un findAll sur l'entité Album en utilisant l'entityManager
@@ -54,5 +54,15 @@ class AlbumServiceTest extends TestCase
         $this->assertInstanceOf('Album\Entity\Album', $first);
     }
 
+    public function testCanFetchOneAlbum()
+    {
+        $Album =  $this->em->getRepository('Album\Entity\Album')->find(1);
+        $this->assertInstanceOf('Album\Entity\Album', $Album);
+    }
 
+    public function testCantFetchOneAlbumBecauseInvalidId()
+    {
+        $Album =  $this->em->getRepository('Album\Entity\Album')->find(600000);
+        $this->assertNotInstanceOf('Album\Entity\Album', $Album);
+    }
 }

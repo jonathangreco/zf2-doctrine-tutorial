@@ -1,8 +1,9 @@
 <?php
-
 /**
+ * Factory permettant d'injecter au controller l'instance du service Album via le service locator
+ * et d'instancier Le controller Album
  * @package Album
- * @author Florent Blaison <florent.blaison@gmail.com>
+ * @author Jonathan Greco <jgreco@docsourcing.com>
  */
 
 namespace Album\Factory;

@@ -1,7 +1,7 @@
 <?php
 /**
  * @package Album
- * @author Florent Blaison <florent.blaison@gmail.com>
+ * @author Jonathan Greco <jgreco@docsourcing.com>
  */
 namespace Album\Form;
 
@@ -42,7 +42,7 @@ class EditAlbumForm extends Form
                     'title',
                     'artist',
                 ),
-                'edit__album_csrf',
+                'edit_album_csrf',
             )
         );
 
@@ -50,9 +50,9 @@ class EditAlbumForm extends Form
             array(
                 'name'       => 'submit',                
                 'attributes' => array(
-                    'type'   => 'Submit',
-                    'value'  => 'Edit',
-                    'id'     => 'submitbutton',
+                    'type'       => 'Submit',
+                    'value' => 'Edit',
+                    'id'    => 'submitbutton',
                 ),
             )
         );

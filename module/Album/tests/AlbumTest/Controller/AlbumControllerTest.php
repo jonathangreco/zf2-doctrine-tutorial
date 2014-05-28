@@ -3,7 +3,7 @@
  * Test Simple de contrôleur
  * Pas besoin d'entityManager
  * @package Album
- * @author Jonathan Greco <nataniel.greco@gmail.com>  
+ * @author Jonathan Greco <jgreco@docsourcing.com>  
  */
 
 namespace AlbumTest\Controller;
@@ -67,6 +67,8 @@ class AlbumControllerTest extends AbstractHttpControllerTestCase {
             'discs' => 1
         );
         $this->dispatch('/album/add', HttpRequest::METHOD_POST, $post);
+        //Avec cette assertion on controle bien que notre message d'erreur est
+        //apparue (balise p) et non pas la balise ul li standard.
         $this->assertQuery('form p');
         $this->assertNotQuery('form ul li');
         $this->assertResponseStatusCode(200);
@@ -99,7 +101,8 @@ class AlbumControllerTest extends AbstractHttpControllerTestCase {
             'discs' => 1
         );
         $this->dispatch('/album/edit/2', HttpRequest::METHOD_POST, $post);
-
+        //Avec cette assertion on controle bien que notre message d'erreur est
+        //apparue (balise p) et non pas la balise ul li standard.
         $this->assertQuery('form p');
         $this->assertNotQuery('form ul li');
         $this->assertResponseStatusCode(200);

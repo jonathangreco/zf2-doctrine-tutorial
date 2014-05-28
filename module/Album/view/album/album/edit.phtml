@@ -1,14 +1,11 @@
 <?php
- // module/Album/view/album/album/edit.phtml:
-
- $title = $this->translate('Edit album');
- $this->headTitle($title);
- ?>
+$title = $this->translate('Edit album');
+$this->headTitle($title);
+?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 
 <?php
 $form = $this->form;
-
 $album = $this->form->get('album');
 $form->setAttribute('action', $this->url(
     'album',
@@ -20,7 +17,7 @@ $form->setAttribute('action', $this->url(
 $form->prepare();
 echo $this->form()->openTag($form);
 ?>
-	<div style="width: 330px;" class="form-group <?php if ($this->formElementErrors($album->get('title'))) echo "has-error" ?>">
+    <div class="form-group <?php if ($this->formElementErrors($album->get('title'))) echo "has-error" ?>">
         <label class="control-label"><?php echo $this->formLabel($album->get('title')) ?></label>
         <?php
         $album  ->get('title')
@@ -38,7 +35,7 @@ echo $this->form()->openTag($form);
             ?>
         <?php endif; ?>
     </div>
-    <div style="width: 330px;" class="form-group <?php if ($this->formElementErrors($album->get('artist'))) echo "has-error" ?>">
+    <div class="form-group <?php if ($this->formElementErrors($album->get('artist'))) echo "has-error" ?>">
         <label class="control-label"><?php echo $this->formLabel($album->get('artist')) ?></label>
         <?php
         $album  ->get('artist')

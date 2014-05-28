@@ -1,6 +1,4 @@
 <?php
-// module/Album/view/album/album/add.phtml:
-
 $title = $this->translate('Add new album');
 $this->headTitle($title);
 ?>
@@ -9,12 +7,11 @@ $this->headTitle($title);
 $form = $this->form;
 $album = $this->form->get('album');
 $form->setAttribute('action', $this->url('album', array('action' => 'add')));
-$form->setAttribute('method', 'post');
 
 $form->prepare();
 echo $this->form()->openTag($form);
 ?>
-    <div style="width: 330px;" class="form-group <?php if ($this->formElementErrors($album->get('title'))) echo "has-error" ?>">
+    <div class="form-group <?php if ($this->formElementErrors($album->get('title'))) echo "has-error" ?>">
         <label class="control-label"><?php echo $this->formLabel($album->get('title')) ?></label>
         <?php
         $album  ->get('title')
@@ -32,7 +29,7 @@ echo $this->form()->openTag($form);
             ?>
         <?php endif; ?>
     </div>
-    <div style="width: 330px;" class="form-group <?php if ($this->formElementErrors($album->get('artist'))) echo "has-error" ?>">
+    <div class="form-group <?php if ($this->formElementErrors($album->get('artist'))) echo "has-error" ?>">
         <label class="control-label"><?php echo $this->formLabel($album->get('artist')) ?></label>
         <?php
         $album  ->get('artist')

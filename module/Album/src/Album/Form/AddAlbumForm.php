@@ -1,7 +1,7 @@
 <?php
 /**
  * @package Album
- * @author Florent Blaison <florent.blaison@gmail.com>
+ * @author Jonathan Greco <jgreco@docsourcing.com>
  */
 namespace Album\Form;
 
@@ -50,9 +50,9 @@ class AddAlbumForm extends Form
             array(
                 'name'       => 'submit',                
                 'attributes' => array(
-                    'type'   => 'Submit',
-                    'value'  => 'Add',
-                    'id'     => 'submitbutton',
+                    'type'       => 'Submit',
+                    'value' => 'Add',
+                    'id'    => 'submitbutton',
                 ),
             )
         );

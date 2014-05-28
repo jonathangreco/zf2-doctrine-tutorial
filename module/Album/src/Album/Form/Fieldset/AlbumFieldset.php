@@ -1,9 +1,11 @@
 <?php
-
 /**
+ * L'album fieldset permet de définir un groupe de champs dépendants entre eux
+ * et les liants a leur entité doctrine (dans le cas d'un contexte 
+ * de formulaire par table) cette classe lorsqu'elle étend InputFilterProviderInterface
+ * permet de définir les validateurs pour le bon fonctionnement du formulaire
  * @package Album
- * @author Jonathan Greco <nataniel.greco@gmail.com>
- * @author Florent Blaison <florent.blaison@gmail.com>
+ * @author Jonathan Greco <jgreco@docsourcing.com>
  */
 namespace Album\Form\Fieldset;
 
@@ -33,8 +35,8 @@ class AlbumFieldset extends Fieldset implements
             array(
                 'name' => 'id',
                 'attributes' => array(
-                    'type' => 'hidden'
-                )
+                    'type' => 'hidden',
+                ),
             )
         );
         $this->add(
