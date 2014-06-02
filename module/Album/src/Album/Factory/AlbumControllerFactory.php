@@ -3,7 +3,7 @@
  * Factory permettant d'injecter au controller l'instance du service Album via le service locator
  * et d'instancier Le controller Album
  * @package Album
- * @author Jonathan Greco <jgreco@docsourcing.com>
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
  */
 
 namespace Album\Factory;

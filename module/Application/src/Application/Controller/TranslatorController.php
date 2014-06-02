@@ -1,7 +1,7 @@
 <?php
 /**
  * @package Application
- * @author Jonathan Greco <jgreco@docsourcing.com>
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
  */
 namespace Application\Controller;
 

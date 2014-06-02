@@ -4,7 +4,7 @@
  * Encore au stade d'Ebauche
  * Entité gérant les Users
  * @package Application
- * @author Jonathan Greco <jgreco@docsourcing.com>
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
  */
 
 namespace Application\Entity;

@@ -1,7 +1,7 @@
 <?php
 /**
  * @package Album
- * @author Jonathan Greco <jgreco@docsourcing.com>
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
  */
 namespace Album\Form;
 

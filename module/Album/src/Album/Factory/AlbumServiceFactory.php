@@ -4,7 +4,7 @@
  * via le service locator dans le service Album et de retourner une instance 
  * de AlbumService
  * @package Album
- * @author Jonathan Greco <jgreco@docsourcing.com>
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
  */
 
 namespace Album\Factory;

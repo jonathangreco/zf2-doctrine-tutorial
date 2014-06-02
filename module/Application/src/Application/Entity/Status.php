@@ -4,7 +4,7 @@
  * Encore au stade d'Ebauche
  * Entité gérant les status des facture, des commandes, etc...
  * @package Application
- * @author Jonathan Greco <jgreco@docsourcing.com>
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
  */
 
 namespace Application\Entity;

@@ -6,7 +6,7 @@ use Zend\Mvc\Service\ServiceManagerConfig;
 
 /**
  * @package Application
- * @author Jonathan Greco <jgreco@docsourcing.com>  
+ * @author Jonathan Greco <nataniel.greco@gmail.com>  
  */
 class ServiceManagerFactory
 {

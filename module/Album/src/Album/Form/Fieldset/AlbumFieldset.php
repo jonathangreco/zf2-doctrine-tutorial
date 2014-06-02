@@ -5,7 +5,7 @@
  * de formulaire par table) cette classe lorsqu'elle étend InputFilterProviderInterface
  * permet de définir les validateurs pour le bon fonctionnement du formulaire
  * @package Album
- * @author Jonathan Greco <jgreco@docsourcing.com>
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
  */
 namespace Album\Form\Fieldset;
 

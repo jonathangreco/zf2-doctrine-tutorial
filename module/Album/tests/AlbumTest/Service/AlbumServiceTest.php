@@ -7,7 +7,7 @@
  * utiliser correctement toutes les méthodes de tests disponibles.
  * 
  * @package Album
- * @author Jonathan Greco <jgreco@docsourcing.com>  
+ * @author Jonathan Greco <nataniel.greco@gmail.com>  
  */
 
 

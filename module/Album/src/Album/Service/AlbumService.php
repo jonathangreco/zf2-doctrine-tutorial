@@ -3,7 +3,7 @@
 /**
  * Classe permettant les traitements sur la table album
  * @package Album
- * @author Jonathan Greco <jgreco@docsourcing.com>
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
  */
 
 namespace Album\Service;

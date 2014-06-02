@@ -5,7 +5,7 @@
  * Entité permettant de lister toutes les langues de notre application
  * En rajouter une devient facile
  * @package Application
- * @author Jonathan Greco <jgreco@docsourcing.com>
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
  */
 namespace Application\Entity;
 

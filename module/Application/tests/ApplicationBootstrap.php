@@ -4,7 +4,7 @@
  * Poir vérifier si l'architecture de notre projet est faisable plus facilement;
  * 
  * @package Application
- * @author Jonathan Greco <jgreco@docsourcing.com>
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
  */
  
 chdir(__DIR__);

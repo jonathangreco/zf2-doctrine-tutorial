@@ -5,7 +5,7 @@
  * Accessible dans nos classe de test ! On factorise l'accès à l'EntityManager
  * 
  * @package Application
- * @author Jonathan Greco <jgreco@docsourcing.com>  
+ * @author Jonathan Greco <nataniel.greco@gmail.com>  
  */
 
 namespace ApplicationTest\Framework;
