@@ -1,6 +1,14 @@
 Skeleton & Doctrine & Jenkins CI & MultipleDB & Translation
 ===========================================================
 
+UPDATE
+------
+Bug fix & new functionalities are up to date on 2 june 2014. Just follow this readme for Install, and Enjoy
+
+new feature :
+FlashMessages are here !! see Album Controller -> IndexAction for more details...(layout.phtml for view)
+Paginator on Album module is up !! With per page option activated ! 
+
 Introduction
 ------------
 This is a Zf2 Skeleton application with Doctrine and multiple database implementation (2 Entity Manager), this skelton use also Jenkins for CI. And translation fr_FR to en_US(or more if you want).
