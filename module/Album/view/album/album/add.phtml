@@ -11,6 +11,7 @@ $form->setAttribute('action', $this->url('album/default', array('controller'=>'a
 $form->prepare();
 echo $this->form()->openTag($form);
 ?>
+<div class="container">
     <div class="form-group <?php if ($this->formElementErrors($album->get('title'))) echo "has-error" ?>">
         <label class="control-label"><?php echo $this->formLabel($album->get('title')) ?></label>
         <?php
@@ -48,6 +49,12 @@ echo $this->form()->openTag($form);
         <?php endif; ?>
     </div>
 <?php
-echo $this->formSubmit($form->get('submit')->setAttribute('class', 'btn btn-success'));
 echo $this->formHidden($this->form->get('add_album_csrf'));
-echo $this->form()->closeTag() ?>
+echo $this->formSubmit($form->get('submit')->setAttribute('class', 'btn btn-success'));
+
+?>
+    <a href="<?php echo $this->url('album');?>" class="margin-left-5 btn btn-danger"><?php echo $this->translate("Cancel")?></a>
+</div>
+<?php
+echo $this->form()->closeTag(); 
+?>

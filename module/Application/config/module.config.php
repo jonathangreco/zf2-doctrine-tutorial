@@ -76,7 +76,7 @@ return array(
         ),
     ),
     'translator' => array(
-        'locale' => 'en_US',
+        'locale' => 'fr_FR',
         'translation_file_patterns' => array(
             array(
                 'type'     => 'gettext',
@@ -85,8 +85,8 @@ return array(
             ),
             array(
                 'type' => 'phpArray',
-                'base_dir' => './vendor/zendframework/zendframework/resources/languages/',
-                'pattern'  => 'fr/Zend_Validate.php',
+                'base_dir' => './module/Application/language/Zend_Validate/',
+                'pattern'  => '%s-Zend_Validate.php',
             ),
         ),
     ),
@@ -118,5 +118,18 @@ return array(
             'routes' => array(
             ),
         ),
+    ),
+    'doctrine'        => array(
+        'driver' => array(
+            'application_entity' => array(
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'paths' => __DIR__ . '/../src/' . __NAMESPACE__ . '/Entity',
+            ),
+            'orm_default'  => array(
+                'drivers' => array(
+                    __NAMESPACE__ . '\Entity' => 'application_entity',
+                )
+            )
+        )
     ),
 );

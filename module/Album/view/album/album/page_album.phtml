@@ -3,14 +3,14 @@
 <div class="pagination-centered">
 	<ul class="pagination">
 	    <li <?php echo!isset($this->previous) ? 'class="disabled"' : ''; ?>>
-	        <a href="<?php echo $this->url($this->route, array('page' => $this->first)); ?>">&laquo;</a></li>
+	        <a href="<?php echo $this->url($this->route, array('page' => $this->first,'mode' => $this->pageChoosen)); ?>">&laquo;</a></li>
 	    <li <?php echo!isset($this->previous) ? 'class="disabled"' : ''; ?>>
-	        <a href="<?php echo $this->url($this->route, array('page' => $this->previous)); ?>">&lsaquo;</a></li>
+	        <a href="<?php echo $this->url($this->route, array('page' => $this->previous,'mode' => $this->pageChoosen)); ?>">&lsaquo;</a></li>
 
 	    <!-- Numbered page links -->
 	    <?php foreach ($this->pagesInRange as $page): ?>
 	        <li
-	        	<?php echo $page == $this->current ? 'class="active"' : ''; ?>><a href="<?php echo $this->url($this->route, array('page' => $page)); ?>">
+	        	<?php echo $page == $this->current ? 'class="active"' : ''; ?>><a href="<?php echo $this->url($this->route, array('page' => $page, 'mode' => $this->pageChoosen)); ?>">
 	                <?php echo $page; ?>
 	        </a>
 	        </li>
@@ -18,10 +18,10 @@
 
 	    <!-- Next page link -->
 	    <li <?php echo!isset($this->next) ? 'class="disabled"' : ''; ?>>
-	        <a href="<?php echo $this->url($this->route, array('page' => $this->next)); ?>">&rsaquo;</a></li>
+	        <a href="<?php echo $this->url($this->route, array('page' => $this->next,'mode' => $this->pageChoosen)); ?>">&rsaquo;</a></li>
 	    <!-- Last page link -->
 	    <li <?php echo!isset($this->next) ? 'class="disabled"' : ''; ?>>
-	        <a href="<?php echo $this->url($this->route, array( 'page' => $this->last)); ?>">&raquo;</a></li>
+	        <a href="<?php echo $this->url($this->route, array( 'page' => $this->last,'mode' => $this->pageChoosen)); ?>">&raquo;</a></li>
     </ul>
 </div>
 <?php endif; ?>

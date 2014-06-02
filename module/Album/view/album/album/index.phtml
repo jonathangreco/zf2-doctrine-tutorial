@@ -4,11 +4,38 @@
 $title = $this->translate('My albums');
 $this->headTitle($title);
 
+$pageChoosen = $this->perPage;
+$perPageChoices = array(10,20,30,50,100);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
-<p>
-    <a href="<?php echo $this->url('album/default', array('controller'=>'album', 'action'=>'add'));?>"><i class="fam-add" title="<?php echo $this->translate('Add');?>"></i><?php echo $this->translate('Add new album');?></a>
-</p>
+<div class="breadcrumb col-lg-12">
+    <p class="text-left col-lg-4">
+        <a href="<?php echo $this->url('album/default', array('controller'=>'album', 'action'=>'add'));?>"><i class="fam-add" title="<?php echo $this->translate('Add');?>"></i><?php echo $this->translate('Add new album');?></a>
+    </p>
+
+    <form action="<?php echo $this->url('album'); ?>" method="post" class="text-right col-lg-4">
+        <span>
+            <?php echo $this->translate('Rows displayed per page');?> :
+        </span>
+        <select name="perPage" id="perPage" onchange="this.form.submit()">
+            <?php
+                $html = '';
+                foreach($perPageChoices as $choice) {
+                    $test = ($choice == $pageChoosen)? "selected=selected" :"";
+                    $html .= '<option value="' . $choice . '" '.$test.'> ' . $choice . '</option>';
+                }
+                echo $html;
+            ?>
+        </select>
+    </form>
+</div>
+<div class="col-lg-12">
+    <?php
+        //Ici on ajoute a la route le paramètre choisi par l'utilisateur pour le nombre d'affichage par page, ceci
+        //determinera la requete dans la vue partielle comme étant un paramètre à prendre en compte
+        echo $this->paginationControl($paginator, 'Sliding', 'album/album/page_helper', array('route' => 'album/page', 'pageChoosen' => $pageChoosen)); 
+    ?>
+</div>
 <table class="table table-striped">
 <thead>
     <tr>
@@ -23,13 +50,10 @@ $this->headTitle($title);
     <td><?php echo $this->escapeHtml($album->getArtist());?></td>
     <td>
         <a href="<?php echo $this->url('album/default',
-            array('controller'=>'album','action'=>'edit', 'id' => $album->getId()));?>"><i class="fam-pencil" title="<?php echo $this->translate('Edit');?>"></i></a>
+            array('controller'=>'album','action'=>'edit', 'id' => $album->getId()));?>"><i class="fam-pencil" title="<?php echo $this->translate('Edit');?>"></i></a> |
         <a href="<?php echo $this->url('album/default',
             array('controller'=>'album','action'=>'delete', 'id' => $album->getId()));?>"><i class="fam-delete" title="<?php echo $this->translate('Delete');?>"></i></a>
     </td>
 </tr>
 <?php endforeach; ?>
 </table>
-<?php
-?>
-<?php echo $this->paginationControl($paginator, 'Sliding', 'album/album/page_helper', array('route' => 'album/page')); ?>

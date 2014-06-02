@@ -14,6 +14,9 @@ use Zend\InputFilter\Factory as InputFactory;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
+use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
+
 use Album\Entity\Album;
 
 class AlbumService implements ServiceLocatorAwareInterface
@@ -41,11 +44,16 @@ class AlbumService implements ServiceLocatorAwareInterface
     }
 
     /**
-     * @return  collection of Album
-     */ 
-    public function getAll()
+     * Fonction permettant de retourner un adapter doctrine pour la table Album
+     * Utilisé pour la pagination
+     * @return $adapter DoctrineAdapter instance
+     */
+    public function getAdapter()
     {
-        return $this->em->getRepository('Album\Entity\Album')->findAll();
+        $repository = $this->em->getRepository('Album\Entity\Album');
+        $adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('album')));
+
+        return $adapter;
     }
 
     /**

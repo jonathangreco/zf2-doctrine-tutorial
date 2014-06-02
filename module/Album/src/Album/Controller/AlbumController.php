@@ -5,8 +5,6 @@
  */
 
 namespace Album\Controller;
-use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
-use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use Zend\Paginator\Paginator;
 
 use Album\Form\AddAlbumForm;
@@ -34,17 +32,23 @@ class AlbumController extends AbstractActionController
 
     public function indexAction()
     {
+        $request = $this->getRequest();
         $view =  new ViewModel();
-
-        $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-        $repository = $entityManager->getRepository('Album\Entity\Album');
-        $adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('albums')));
+        $adapter = $this->albumService->getAdapter();
         $paginator = new Paginator($adapter);
-        $paginator->setDefaultItemCountPerPage(10);
+        $perPage = ($this->params()->fromRoute('mode')!=null)?$this->params()->fromRoute('mode'):30;
+        if($request->isPost()) {
+            $perPage = $request->getPost()->get('perPage');
+        }
+        $paginator->setDefaultItemCountPerPage($perPage);
         $page = (int)$this->params()->fromRoute('page');
         if($page) $paginator->setCurrentPageNumber($page);
 
+        $this->flashMessenger()->addMessage(array('success'=>'Welcome on Album module by Jonathan Greco'));
+
         $view->setVariable('paginator',$paginator);
+        $view->setVariable('perPage', $perPage);
+        $view->setVariable('flashMessages', $this->flashMessenger()->getMessages());
 
         return $view;
     }

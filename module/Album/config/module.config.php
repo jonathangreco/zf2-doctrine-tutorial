@@ -39,14 +39,15 @@ return array(
                     'page' => array(
                         'type' => 'segment',
                         'options' => array(
-                            'route'       => '/[page/:page]',
+                            'route'       => '/page[/:page[/:mode]]',
                             'constraints' => array(
                                 'page'     => '[0-9]*',
                             ),
                             'defaults'    => array(
                                 'controller' => 'Album\Controller\Album',
                                 'action'     => 'index',
-                                'page'      => 1
+                                'page'      => '1',
+                                'mode'      => 30
                             ),
                         ),
                     ),

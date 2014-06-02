@@ -2,7 +2,7 @@
 /**
  *
  * @package Application
- * @author Jonathan Greco <nataniel.greco@gmail.com>  
+ * @author Jonathan Greco <jgreco@docsourcing.com>  
  */
 namespace Application;
 
@@ -10,18 +10,21 @@ use Zend\Mvc\ModuleRouteListener;
 use Application\View\Helper\AbsoluteUrl;
 use Zend\Mvc\MvcEvent;
 use Zend\Session\Container;
+use Zend\I18n\Translator\Translator;
+use Zend\Validator\AbstractValidator;
 
 class Module
 {
     public function onBootstrap(MvcEvent $e)
     {
-
+        
         $sessionContainer = new Container('locale');
         // teste si la langue en session existe
         if(!$sessionContainer->offsetExists('mylocale')){
             // n'existe pas donc on ajoute la langue par défaut
             $sessionContainer->offsetSet('mylocale', 'fr_FR');
         }
+ 
         $translator = $e->getApplication()->getServiceManager()->get('translator');
         $translator ->setLocale($sessionContainer->mylocale)
         ->setFallbackLocale('en_US');
@@ -61,3 +64,4 @@ class Module
     }
 
 }
+

@@ -5,7 +5,7 @@
  * Accessible dans nos classe de test ! On factorise l'accès à l'EntityManager
  * 
  * @package Application
- * @author Jonathan Greco <nataniel.greco@gmail.com>  
+ * @author Jonathan Greco <jgreco@docsourcing.com>  
  */
 
 namespace ApplicationTest\Framework;
@@ -17,7 +17,7 @@ use ApplicationTest\Util\ServiceManagerFactory;
 
 class TestCase extends AbstractHttpControllerTestCase
 {
-	/**
+    /**
      * @var EntityManager
      */
     private $entityManager;

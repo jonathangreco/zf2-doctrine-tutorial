@@ -2,7 +2,7 @@
 /**
  * 
  * @package Application
- * @author Jonathan Greco <nataniel.greco@gmail.com>  
+ * @author Jonathan Greco <jgreco@docsourcing.com>  
  */
 namespace ApplicationTest;
 return array(
@@ -11,6 +11,9 @@ return array(
         'DoctrineORMModule',
         'Application',
         'Album',
+        'Invoice',
+        'Order',
+        'Item',
     ),
     'module_listener_options' => array(
         'config_glob_paths'    => array(
