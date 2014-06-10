@@ -1,11 +1,4 @@
 <?php echo $this->doctype(); ?>
-
-<?php
-$children = $this->viewModel()
-                 ->getCurrent()
-                 ->getChildren();
-    $ourView  = $children[0];
-?>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -41,7 +34,7 @@ $children = $this->viewModel()
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img src="<?php echo $this->basePath('img/zf2-logo.png') ?>" alt="Zend Framework 2" class="logoCorporateRedim"/></a>
+                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img src="<?php echo $this->basePath('img/logo_docsourcing.png') ?>" alt="Zend Framework 2" class="logoCorporateRedim"/></a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <?php echo $this->navigation('navigation')->menu()->setMaxDepth(0)->setUlClass('nav navbar-nav')?>
@@ -74,18 +67,20 @@ $children = $this->viewModel()
             </div>
         </nav>
         <div class="container">
-             <?php 
-                //Affichage des messages de type FlashMessages (message d'informations)
-                if (isset($ourView->flashMessages) && count($ourView->flashMessages)) : ?>
-                    <?php foreach ($ourView->flashMessages as $fMessage) : ?>
-                    <?php foreach ($fMessage as $kMsg=>$valMsg) : ?>
-                        <div class="alert  alert-<?=$kMsg?>">
-                            <a href="#" class="close" data-dismiss="alert">&times;</a>
-                            <p><?=$valMsg?></p>
-                        </div>
-                    <?php endforeach; ?>
-                    <?php endforeach; ?>
-                <?php endif; 
+            <?php
+                if ($this->flashMessages) {
+                    foreach ($this->flashMessages as $context => $messages) {
+                      echo '<div class="alert alert-dismissable alert-' . $context . '">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                             &times;
+                         </button>
+                      <ul>';
+                      foreach ($messages as $message) {
+                        echo '<li>' . $message . '</li>';
+                      }
+                      echo '</ul></div>';
+                    }
+                }
                 echo $this->navigation('navigation')->breadcrumbs()->setMinDepth(0)->setPartial(array('partial/breadcrumbs.phtml', 'Application')); 
                 echo $this->content; 
             ?>

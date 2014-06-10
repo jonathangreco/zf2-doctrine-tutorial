@@ -36,7 +36,7 @@ class AlbumController extends AbstractActionController
         $view =  new ViewModel();
         $adapter = $this->albumService->getAdapter();
         $paginator = new Paginator($adapter);
-        $perPage = ($this->params()->fromRoute('mode')!=null)?$this->params()->fromRoute('mode'):30;
+        $perPage = ($this->params()->fromRoute('mode') != null) ? $this->params()->fromRoute('mode') : 30;
         if($request->isPost()) {
             $perPage = $request->getPost()->get('perPage');
         }
@@ -44,11 +44,9 @@ class AlbumController extends AbstractActionController
         $page = (int)$this->params()->fromRoute('page');
         if($page) $paginator->setCurrentPageNumber($page);
 
-        $this->flashMessenger()->addMessage(array('success'=>'Welcome on Album module by Jonathan Greco'));
-
         $view->setVariable('paginator',$paginator);
         $view->setVariable('perPage', $perPage);
-        $view->setVariable('flashMessages', $this->flashMessenger()->getMessages());
+        
 
         return $view;
     }
@@ -58,6 +56,7 @@ class AlbumController extends AbstractActionController
      */ 
     public function addAction()
     {
+        $view =  new ViewModel();
         /** @var AddAlbumForm $form */
         $form = $this->getServiceLocator()->get('formElementManager')->get('Album\Form\AddAlbum');
         $request = $this->getRequest();
@@ -68,17 +67,13 @@ class AlbumController extends AbstractActionController
             if ($form->isValid()) {
                 $album = $form->getData();
                 $this->albumService->addAlbum($album);
-
+                $this->flashMessenger()->setNamespace('success')->addMessage('Your album has been added.');
                 // Redirect to list of albums
-                return $this->redirect()->toRoute('album');
+                $this->redirect()->toRoute('album');
             }
         }
-
-        return new ViewModel(
-            array(
-                'form' => $form
-            )
-        );
+        $view->setVariable('form', $form);
+        return $view;
     }
 
     /**
@@ -86,6 +81,7 @@ class AlbumController extends AbstractActionController
      */ 
     public function editAction()
     {
+        $view =  new ViewModel();
         $id = (int)$this->params()->fromRoute('id', 0);
         $album = $this->albumService->getAlbum($id);
 
@@ -103,14 +99,14 @@ class AlbumController extends AbstractActionController
             if ($form->isValid()) {
                 $album = $form->getData();
                 $this->albumService->updateAlbum($album);
+                 $this->flashMessenger()->setNamespace('success')->addMessage('Your album has been edited.');
                 // Redirect to list of albums
                 return $this->redirect()->toRoute('album');
             }
         }
-        return new ViewModel(array(
-            'form' => $form,
-            'id' => $id
-        ));
+        $view->setVariable('form', $form);
+        $view->setVariable('id', $id);
+        return $view;
 
     }
 
@@ -119,6 +115,7 @@ class AlbumController extends AbstractActionController
      */ 
     public function deleteAction()
     {
+        $view =  new ViewModel();
         $id = (int)$this->params()->fromRoute('id', 0);
 
         $album = $this->albumService->getAlbum($id);
@@ -131,17 +128,16 @@ class AlbumController extends AbstractActionController
             $del = $request->getPost('response', 'no');
             if ($del == 'yes') {
                 $this->albumService->deleteAlbum($album);
+                 $this->flashMessenger()->setNamespace('success')->addMessage('Your album has been deleted.');
             }
 
             // Redirect to list of albums
             return $this->redirect()->toRoute('album');
         }
 
-        return new ViewModel(
-            array(
-                'id'    => $id,
-                'album' => $album
-            )
-        );
+        $view->setVariable('album', $album);
+        $view->setVariable('id', $id);
+
+        return $view;
     }
 }
