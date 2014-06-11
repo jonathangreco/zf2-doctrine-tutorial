@@ -10,7 +10,9 @@
  * control, so do not include passwords or other sensitive information in this
  * file.
  * @package config
- * @author Jonathan Greco <nataniel.greco@gmail.com>  
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
+ * @author Florent Blaison <florent.blaison@gmail.com>  
  */
 
 return array(

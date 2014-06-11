@@ -3,7 +3,9 @@
  * Test Simple de contrôleur
  * Pas besoin d'entityManager
  * @package Album
- * @author Jonathan Greco <nataniel.greco@gmail.com>  
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
+ * @author Florent Blaison <florent.blaison@gmail.com>  
  */
 
 namespace AlbumTest\Controller;

@@ -5,6 +5,8 @@
  * Entité gérant les status des facture, des commandes, etc...
  * @package Application
  * @author Jonathan Greco <nataniel.greco@gmail.com>
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
+ * @author Florent Blaison <florent.blaison@gmail.com>
  */
 
 namespace Application\Entity;

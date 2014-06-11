@@ -3,7 +3,9 @@
  * Ceci est le boostrap d'ocramius que nous testons au sein de notre Album
  * Poir vérifier si l'architecture de notre projet est faisable plus facilement;
  * @package Album
- * @author Jonathan Greco <nataniel.greco@gmail.com>  
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
+ * @author Jonathan Greco <nataniel.greco@gmail.com>
+ * @author Florent Blaison <florent.blaison@gmail.com>  
  */
  
 chdir(__DIR__);
