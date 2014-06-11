@@ -3,10 +3,10 @@ Skeleton & Doctrine & Jenkins CI & MultipleDB & Translation
 
 UPDATE
 ------
-Bug fix & new functionalities are up to date on `2 june 2014`. Just follow this readme for Install, and Enjoy
+Bug fix & new functionalities are up to date on `11 june 2014`. Just follow this readme for Install, and Enjoy
 
 new feature :
-- FlashMessages are here !! see Album Controller -> IndexAction for more details...(layout.phtml for view)
+- FlashMessages are here !! see Album Controller -> AddAction for more details...(layout.phtml for view & Application\Module.php)
 - Paginator on Album module is up !! With per page option activated ! 
 
 Introduction
