@@ -53,6 +53,9 @@ class AlbumController extends AbstractActionController
 
     /**
      * Ajout d'un album
+     * Pour toutes les actions de ce module un flash message apparait sur la page qui suivra la fin
+     * d'une action. Cette fonctionalité permet d'expliquer à l'utilisateur que sa demande à été traitée
+     * soit avec succès soit avec une erreure un message lui est renvoyée dans tout les cas.
      */ 
     public function addAction()
     {
