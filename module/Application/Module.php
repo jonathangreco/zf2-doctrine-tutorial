@@ -34,7 +34,7 @@ class Module
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
 
-        // Show flashmessages in the view
+        // Récupère tous les messages FlashMessages
         $eventManager->attach(MvcEvent::EVENT_RENDER, function($e) {
             $flashMessenger = new FlashMessenger;
      
@@ -45,7 +45,13 @@ class Module
                 $messages['success'] = $flashMessenger->getMessages();
             }
             $flashMessenger->clearMessages();
-     
+            
+            $flashMessenger->setNamespace('warning');
+            if ($flashMessenger->hasMessages()) {
+                $messages['warning'] = $flashMessenger->getMessages();
+            }
+            $flashMessenger->clearMessages();
+
             $flashMessenger->setNamespace('info');
             if ($flashMessenger->hasMessages()) {
                 $messages['info'] = $flashMessenger->getMessages();
@@ -68,7 +74,6 @@ class Module
                 $messages['error'] = $flashMessenger->getMessages();
             }
             $flashMessenger->clearMessages();
-     
             $e->getViewModel()->setVariable('flashMessages', $messages);
         });
     }

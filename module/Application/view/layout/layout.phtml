@@ -74,11 +74,11 @@
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                              &times;
                          </button>
-                      <ul>';
+                      ';
                       foreach ($messages as $message) {
-                        echo '<li>' . $message . '</li>';
+                        echo '<p>' . $message . '</p>';
                       }
-                      echo '</ul></div>';
+                      echo '</div>';
                     }
                 }
                 echo $this->navigation('navigation')->breadcrumbs()->setMinDepth(0)->setPartial(array('partial/breadcrumbs.phtml', 'Application')); 

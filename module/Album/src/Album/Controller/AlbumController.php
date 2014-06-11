@@ -74,6 +74,8 @@ class AlbumController extends AbstractActionController
                 // Redirect to list of albums
                 return $this->redirect()->toRoute('album');
             }
+            $this->flashMessenger()->setNamespace('warning')
+                 ->addMessage('An error occured please check informations below fields form more informations.');
         }
         $view->setVariable('form', $form);
         return $view;
@@ -102,10 +104,12 @@ class AlbumController extends AbstractActionController
             if ($form->isValid()) {
                 $album = $form->getData();
                 $this->albumService->updateAlbum($album);
-                 $this->flashMessenger()->setNamespace('success')->addMessage('Your album has been edited.');
+                $this->flashMessenger()->setNamespace('success')->addMessage('Your album has been edited.');
                 // Redirect to list of albums
                 return $this->redirect()->toRoute('album');
             }
+            $this->flashMessenger()->setNamespace('warning')
+                 ->addMessage('An error occured please check informations below fields form more informations.');
         }
         $view->setVariable('form', $form);
         $view->setVariable('id', $id);

@@ -49,7 +49,7 @@ class AlbumControllerTest extends AbstractHttpControllerTestCase {
      */ 
     public function testAddActionCanBeAccessed()
     {
-        $this->dispatch('/album/add');
+        $this->dispatch('/album/album/add');
         $this->assertResponseStatusCode(200);
         $this->assertActionName('add');
         $this->assertNotActionName('edit');
@@ -66,7 +66,7 @@ class AlbumControllerTest extends AbstractHttpControllerTestCase {
             'title' => '',
             'discs' => 1
         );
-        $this->dispatch('/album/add', HttpRequest::METHOD_POST, $post);
+        $this->dispatch('/album/album/add', HttpRequest::METHOD_POST, $post);
         //Avec cette assertion on controle bien que notre message d'erreur est
         //apparue (balise p) et non pas la balise ul li standard.
         $this->assertQuery('form p');
@@ -76,7 +76,7 @@ class AlbumControllerTest extends AbstractHttpControllerTestCase {
         $this->assertControllerName('Album\Controller\Album');
         $this->assertControllerClass('AlbumController');
         $this->assertActionName('add');
-        $this->assertMatchedRouteName('album');
+        $this->assertMatchedRouteName('album/default');
     }
 
     /**
@@ -84,7 +84,7 @@ class AlbumControllerTest extends AbstractHttpControllerTestCase {
      */ 
     public function testEditActionCanBeAccessed()
     {
-        $this->dispatch('/album/edit/2');
+        $this->dispatch('/album/album/edit/2');
         $this->assertResponseStatusCode(200);
         $this->assertActionName('edit');
         $this->assertNotActionName('add');
@@ -100,7 +100,7 @@ class AlbumControllerTest extends AbstractHttpControllerTestCase {
             'title' => '',
             'discs' => 1
         );
-        $this->dispatch('/album/edit/2', HttpRequest::METHOD_POST, $post);
+        $this->dispatch('/album/album/edit/2', HttpRequest::METHOD_POST, $post);
         //Avec cette assertion on controle bien que notre message d'erreur est
         //apparue (balise p) et non pas la balise ul li standard.
         $this->assertQuery('form p');
@@ -110,7 +110,7 @@ class AlbumControllerTest extends AbstractHttpControllerTestCase {
         $this->assertControllerName('Album\Controller\Album');
         $this->assertControllerClass('AlbumController');
         $this->assertActionName('edit');
-        $this->assertMatchedRouteName('album');
+        $this->assertMatchedRouteName('album/default');
     }
 
     /**
@@ -124,14 +124,14 @@ class AlbumControllerTest extends AbstractHttpControllerTestCase {
             'title' => 'Led Zeppelin III',
             'discs' => 1
         );
-        $this->dispatch('/album/add', HttpRequest::METHOD_POST, $post);
+        $this->dispatch('/album/album/add', HttpRequest::METHOD_POST, $post);
 
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('Album');
         $this->assertControllerName('Album\Controller\Album');
         $this->assertControllerClass('AlbumController');
         $this->assertActionName('add');
-        $this->assertMatchedRouteName('album');
+        $this->assertMatchedRouteName('album/default');
     }
 
     /**
@@ -140,7 +140,7 @@ class AlbumControllerTest extends AbstractHttpControllerTestCase {
      */
     public function testDeleteActionCanBeAccessed()
     {
-        $this->dispatch('/album/delete/2');
+        $this->dispatch('/album/album/delete/2');
         $this->assertResponseStatusCode(200);
         $this->assertActionName('delete');
         $this->assertNotActionName('add');
@@ -157,14 +157,14 @@ class AlbumControllerTest extends AbstractHttpControllerTestCase {
             'artist' => 'Dido',
             'title' => 'No Angel'
         );
-        $this->dispatch('/album/edit/2', HttpRequest::METHOD_POST, $post);
+        $this->dispatch('/album/album/edit/2', HttpRequest::METHOD_POST, $post);
 
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('Album');
         $this->assertControllerName('Album\Controller\Album');
         $this->assertControllerClass('AlbumController');
         $this->assertActionName('edit');
-        $this->assertMatchedRouteName('album');
+        $this->assertMatchedRouteName('album/default');
     }
 
     /**
@@ -172,14 +172,14 @@ class AlbumControllerTest extends AbstractHttpControllerTestCase {
      */ 
     public function testEditActionBadRequestCausedByMissingId()
     {
-        $this->dispatch('/album/edit');
+        $this->dispatch('/album/album/edit');
 
         $this->assertResponseStatusCode(302);
         $this->assertModuleName('Album');
         $this->assertControllerName('Album\Controller\Album');
         $this->assertControllerClass('AlbumController');
         $this->assertActionName('edit');
-        $this->assertMatchedRouteName('album');
+        $this->assertMatchedRouteName('album/default');
     }
 
     /**
@@ -188,14 +188,14 @@ class AlbumControllerTest extends AbstractHttpControllerTestCase {
      */ 
     public function testDeleteActionBadRequestCausedByMissingId()
     {
-        $this->dispatch('/album/delete');
+        $this->dispatch('/album/album/delete');
 
         $this->assertResponseStatusCode(302);
         $this->assertModuleName('Album');
         $this->assertControllerName('Album\Controller\Album');
         $this->assertControllerClass('AlbumController');
         $this->assertActionName('delete');
-        $this->assertMatchedRouteName('album');
+        $this->assertMatchedRouteName('album/default');
     }
 
 }
