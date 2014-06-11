@@ -69,7 +69,7 @@ class AlbumController extends AbstractActionController
                 $this->albumService->addAlbum($album);
                 $this->flashMessenger()->setNamespace('success')->addMessage('Your album has been added.');
                 // Redirect to list of albums
-                $this->redirect()->toRoute('album');
+                return $this->redirect()->toRoute('album');
             }
         }
         $view->setVariable('form', $form);
