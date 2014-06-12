@@ -6,7 +6,6 @@
  * permet de définir les validateurs pour le bon fonctionnement du formulaire
  * @package Album
  * @author Jonathan Greco <nataniel.greco@gmail.com>
- * @author Jonathan Greco <nataniel.greco@gmail.com>
  * @author Florent Blaison <florent.blaison@gmail.com>
  */
 namespace Album\Form\Fieldset;

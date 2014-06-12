@@ -5,7 +5,6 @@
  * Accessible dans nos classe de test ! On factorise l'accès à l'EntityManager
  * @package Album
  * @author Jonathan Greco <nataniel.greco@gmail.com>
- * @author Jonathan Greco <nataniel.greco@gmail.com>
  * @author Florent Blaison <florent.blaison@gmail.com>  
  */
 

@@ -4,7 +4,6 @@
  * Poir vérifier si l'architecture de notre projet est faisable plus facilement;
  * @package Album
  * @author Jonathan Greco <nataniel.greco@gmail.com>
- * @author Jonathan Greco <nataniel.greco@gmail.com>
  * @author Florent Blaison <florent.blaison@gmail.com>  
  */
  
