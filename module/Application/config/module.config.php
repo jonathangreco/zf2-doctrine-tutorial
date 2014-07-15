@@ -1,8 +1,7 @@
 <?php
 /**
  * @package Application
- * @author Jonathan Greco <nataniel.greco@gmail.com>
- * @author Florent Blaison <florent.blaison@gmail.com>
+ * @author Jonathan Greco <jgreco@docsourcing.com>
  */
 
 namespace Application;
@@ -74,6 +73,8 @@ return array(
         'factories' => array(
             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
             'translate' => 'Zend\I18n\Translator\TranslatorServiceFactory',
+            'Application\Service\ToolBoxService' => 'Application\Factory\ToolBoxServiceFactory',
+            'Application\Service\MailService' => 'Application\Factory\MailServiceFactory',
         ),
     ),
     'translator' => array(
@@ -88,6 +89,11 @@ return array(
                 'type' => 'phpArray',
                 'base_dir' => './module/Application/language/Zend_Validate/',
                 'pattern'  => '%s-Zend_Validate.php',
+            ),
+            array(
+                'type' => 'phpArray',
+                'base_dir' => './module/Application/language/FlashMessage/',
+                'pattern'  => '%s-flashMessage.php',
             ),
         ),
     ),

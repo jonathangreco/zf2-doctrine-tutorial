@@ -1,6 +1,5 @@
 <?php
 // module/Album/view/album/album/index.phtml:
-
 $title = $this->translate('My albums');
 $this->headTitle($title);
 
@@ -10,7 +9,7 @@ $perPageChoices = array(10,20,30,50,100);
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 <div class="breadcrumb col-lg-12">
     <p class="text-left col-lg-4">
-        <a href="<?php echo $this->url('album/default', array('controller'=>'album', 'action'=>'add'));?>"><i class="fam-add" title="<?php echo $this->translate('Add');?>"></i><?php echo $this->translate('Add new album');?></a>
+        <a href="<?php echo $this->url('album/default', array('controller'=>'album', 'action'=>'add'));?>"><i class="fa fa-plus" title="<?php echo $this->translate('Add');?>"></i>&nbsp;<?php echo $this->translate('Add new album');?></a>
     </p>
 
     <form action="<?php echo $this->url('album'); ?>" method="post" class="text-right col-lg-4">
@@ -50,9 +49,9 @@ $perPageChoices = array(10,20,30,50,100);
     <td><?php echo $this->escapeHtml($album->getArtist());?></td>
     <td>
         <a href="<?php echo $this->url('album/default',
-            array('controller'=>'album','action'=>'edit', 'id' => $album->getId()));?>"><i class="fam-pencil" title="<?php echo $this->translate('Edit');?>"></i></a> |
+            array('controller'=>'album','action'=>'edit', 'id' => $album->getId()));?>"><i class="fa fa-pencil" title="<?php echo $this->translate('Edit');?>"></i></a> |
         <a href="<?php echo $this->url('album/default',
-            array('controller'=>'album','action'=>'delete', 'id' => $album->getId()));?>"><i class="fam-delete" title="<?php echo $this->translate('Delete');?>"></i></a>
+            array('controller'=>'album','action'=>'delete', 'id' => $album->getId()));?>"><i class="fa fa-times" title="<?php echo $this->translate('Delete');?>"></i></a>
     </td>
 </tr>
 <?php endforeach; ?>
