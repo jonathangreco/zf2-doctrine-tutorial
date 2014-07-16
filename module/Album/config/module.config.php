@@ -15,13 +15,17 @@ return array(
     'router'          => array(
         'routes' => array(
             'album' => array(
-                'type'    => 'Literal',
+                'type'    => 'Segment',
                 'options' => array(
-                    'route'       => '/album',
+                    'route'       => '/:lang/album',
+                    'constraints' => array(
+                        'lang' => '(en|nl|fr|ru)?',
+                    ),
                     'defaults'    => array(
                         '__NAMESPACE__' => 'Album\Controller',
                         'controller'    => 'Album',
                         'action'     => 'index',
+                        'lang'      => 'fr'
                     ),
                 ),
                 'may_terminate' => true,
@@ -29,7 +33,7 @@ return array(
                     'default' => array(
                         'type'=> 'Segment',
                         'options' => array(
-                            'route' => '/[:controller[/:action[/:id]]]',
+                            'route' => '[/:controller[/:action[/:id]]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
@@ -40,7 +44,7 @@ return array(
                     'page' => array(
                         'type' => 'segment',
                         'options' => array(
-                            'route'       => '/page[/:page[/:mode]]',
+                            'route'       => '[/:page[/:mode]]',
                             'constraints' => array(
                                 'page'     => '[0-9]*',
                             ),
@@ -56,8 +60,9 @@ return array(
             ),
         ),
     ),
+    //obligatoire pour les traduction par routes
     'translator' => array(
-        'locale' => 'fr_FR',
+        'locale' => 'fr',
         'translation_file_patterns' => array(
             array(
                 'type'     => 'gettext',
@@ -102,5 +107,13 @@ return array(
                 )
             )
         )
+    ),
+    'navigation' => array(
+        'default' => array(
+            'Album' => array(
+                'label' => 'Album',
+                'route' => 'album',
+            ),
+        ),
     ),
 );

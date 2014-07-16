@@ -2,7 +2,7 @@
 <html lang="<?php echo substr($this->navigation()->getTranslator()->getLocale(), 0, 2); ?>">
     <head>
         <meta charset="utf-8">
-        <?php echo $this->headTitle('Mylink by DocSourcing')
+        <?php echo $this->headTitle('Jonathan Greco')
             ->setSeparator(' - ')
             ->setAutoEscape(false) 
         ?>
@@ -23,14 +23,14 @@
             ->prependStylesheet($this->basePath() . '/css/style.css')
             ->prependStylesheet($this->basePath() . '/css/bootstrap-override.css')
             ->prependStylesheet('http://fonts.googleapis.com/css?family=Open+Sans')
-            ->prependStylesheet($this->basePath() . '/font-awesome/css/font-awesome.min.css')
+            ->prependStylesheet($this->basePath() . '/css/font-awesome.min.css')
             ->prependStylesheet($this->basePath() . '/css/bootstrap-theme.min.css')
             ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
         ?>
 
         <!-- Scripts -->
         <?php echo $this->headScript()
-            ->prependFile($this->basePath() . '/bootstrap/js/bootstrap.min.js')
+            ->prependFile($this->basePath() . '/js/bootstrap.min.js')
             ->prependFile($this->basePath() . '/js/jquery.min.js')
             ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9'))
             ->prependFile($this->basePath() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9'))
@@ -62,7 +62,7 @@
                                 <?php 
                                     //On gère ici l'affichage des langue dans la navigation on change la 
                                     //couleur du drapeau selon la langue
-                                    if($this->navigation()->getTranslator()->getLocale() == 'fr_FR')
+                                    if($this->navigation()->getTranslator()->getLocale() == 'fr')
                                     {
                                         echo '<span class="flag fr"></span> FR <span class="caret"></span>';
                                     } else {
@@ -71,10 +71,10 @@
                                 ?>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href='<?php echo $this->url('changelocale', array('locale'=>'fr_FR', 'redirecturl'=>urlencode($this->absoluteUrl()))); ?>'>
+                                <li><a href="<?= $this->url($this->route, array('lang' => 'fr'));?>">
                                     <span class="flag fr"></span> Français
                                 </a></li>
-                                <li><a href='<?php echo $this->url('changelocale', array('locale'=>'en_US', 'redirecturl'=>urlencode($this->absoluteUrl()))); ?>'>
+                                <li><a href="<?=$this->url($this->route, array('lang' => 'en'));?>">
                                     <span class="flag gb"></span> English
                                 </a></li>
                             </ul>
@@ -174,7 +174,8 @@
                               echo '</div>';
                             }
                         }
-                        echo $this->navigation('navigation')->breadcrumbs()->setMinDepth(0)->setPartial(array('partial/breadcrumbs.phtml', 'Application')); 
+                        echo $this->navigation('navigation')->breadcrumbs()->setMinDepth(0)->setPartial(array('partial/breadcrumbs.phtml', 'Application'));
+                        echo $this->navigation()->getTranslator()->getLocale();
                         echo $this->content; 
                     ?>
                 </div>

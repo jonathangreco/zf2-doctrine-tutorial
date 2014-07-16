@@ -9,7 +9,7 @@ return array(
     'router' => array(
         'routes' => array(
             'home' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type' => 'Literal',
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
@@ -17,15 +17,34 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'language' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/[:lang]',
+                            'constraints' => array(
+                                'lang' => '(en|nl|fr|ru)'
+                            ),
+                            'defaults' => array(
+                                'lang' => 'fr',
+                            ),
+                        ),
+                    ),
+                ),
             ),
+
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
             // using the path /application/:controller/:action
             'application' => array(
-                'type'    => 'Literal',
+                'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/application',
+                    'route'    => '[/:lang]/application',
+                    'constraints' => array(
+                        'lang' => '(en|nl|fr|ru)?',
+                    ),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Index',
@@ -37,7 +56,7 @@ return array(
                     'default' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/[:controller[/:action]]',
+                            'route'    => '[/:controller[/:action]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
@@ -46,18 +65,6 @@ return array(
                             ),
                         ),
                     ),
-                ),
-            ),
-            'changelocale' => array(
-                'type' => 'segment',
-                'options' => array(
-                    'route' => '/changelocale[/:locale[/:redirecturl]]',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Translator',
-                        'action' => 'changelocale',
-                        'locale' => '',
-                        'redirecturl' => ''
-                    )
                 ),
             ),
         ),
@@ -78,7 +85,7 @@ return array(
         ),
     ),
     'translator' => array(
-        'locale' => 'fr_FR',
+        'locale' => 'fr',
         'translation_file_patterns' => array(
             array(
                 'type'     => 'gettext',
@@ -100,7 +107,6 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
-            'Application\Controller\Translator' => 'Application\Controller\TranslatorController'
         ),
     ),
     'view_manager' => array(
