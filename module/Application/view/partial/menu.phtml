@@ -1,0 +1,43 @@
+<?php
+/**
+ * Ce fichier sert en réalité à gérer tout le menu et son affichage
+ * C'est ici que l'on gérera également tout ce qui est ACL et RBAC
+ * Ce menu utilise $this->translate() et on peut donc traduire notre navigation
+ * Ce fichier est appelé dans le layout via la méthode setPartial
+ */
+
+foreach ($this->container as $page)
+{
+    $hasChildren = $page->hasPages();
+    if( ! $hasChildren)
+    {
+        ?>
+        <li <?php if ($page->isActive()) echo ' class="active"' ?>><a href="<?php echo $page->getHref(); ?>"><?php echo $this->translate($page->getLabel()); ?></a></li>
+        <?php
+    }
+    else
+    {
+        ?>
+        <li class="dropdown<?php if ($page->isActive(true)) echo ' active open' ?>">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <?php echo $this->translate($page->getLabel()); ?>&nbsp;
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+            <?php
+            foreach($page->getPages() as $child)
+            {
+                if($child->isActive()? $active="active" : $active = "");
+            ?>
+                <li <?php if ($child->isActive()) echo ' class="active"' ?>><a href="<?php echo $child->getHref(); ?>"><?php echo $this->translate($child->getLabel()); ?></a></li>
+                <?php
+            }
+            ?>
+
+            <hr class="hr-menu" />
+            </ul>
+        </li>
+        <?php
+    }
+}
+?>
