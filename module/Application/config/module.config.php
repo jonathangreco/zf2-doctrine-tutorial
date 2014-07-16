@@ -9,12 +9,16 @@ return array(
     'router' => array(
         'routes' => array(
             'home' => array(
-                'type' => 'Literal',
+                'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/',
+                    'route'    => '/[:lang]',
+                    'constraints' => array(
+                        'lang' => '(en|nl|fr|ru)?'
+                    ),
                     'defaults' => array(
                         'controller' => 'Application\Controller\Index',
                         'action'     => 'index',
+                        'lang' => 'fr',
                     ),
                 ),
                 'may_terminate' => true,
@@ -22,9 +26,9 @@ return array(
                     'language' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/[:lang]',
+                            'route'    => '[/:lang]',
                             'constraints' => array(
-                                'lang' => '(en|nl|fr|ru)'
+                                'lang' => '(en|nl|fr|ru)?'
                             ),
                             'defaults' => array(
                                 'lang' => 'fr',
