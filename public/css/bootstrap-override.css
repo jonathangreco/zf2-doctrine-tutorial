@@ -1,0 +1,134 @@
+body {
+  padding-top: 50px;
+}
+
+/* Table Headers */
+.panel-default {
+    border: none;
+}
+
+.panel.panel-default .panel-heading {
+  background: #495D6C;
+  border: solid 1px #495D6C;
+  color: #fff;
+}
+
+.table thead tr th {
+  background: #0094d7;
+  color: #fff;
+  border: none;
+  padding: 10px 5px;
+}
+
+
+#wrapper {
+  padding-left: 0;
+}
+
+#page-wrapper {
+  width: 100%;
+  padding: 5px 15px;
+}
+
+/* Edit Below to Customize Widths > 768px */
+@media (min-width:768px) {
+
+  /* Wrappers */
+
+  #wrapper {
+  padding-left: 225px;
+  }
+
+  #page-wrapper {
+  padding: 15px 25px;
+  }
+
+  /* Side Nav */
+  .side-nav {
+    margin-left: -225px;
+    left: 225px;
+    width: 225px;
+    position: fixed;
+    top: 53px;
+    height: auto;
+    border-radius: 0;
+    border: none;
+    background-color: #495D6C;
+    font-size : 13px;
+    list-style-type: none;
+    line-height: 1.42857143;
+    overflow-y: auto;
+  }
+  .navbar-nav.side-nav>li>a {
+    width:225px;
+    color : #FFF;
+    display :block;
+    padding: 10px 15px 10px 15px;
+    clear:both;
+    text-shadow : none;
+  }
+
+  .navbar-nav.side-nav>li>a:hover,
+  .navbar-nav.side-nav>li.active>a, 
+  .navbar-nav.side-nav>li>a:focus,
+  .navbar-nav.navbar-inverse >.open>a, 
+  .navbar-nav.navbar-inverse >.open>a:hover, 
+  .navbar-nav.navbar-inverse >.open>a:focus,
+  .navbar-nav.side-nav>li.active>a:hover,
+  .navbar-nav.side-nav>li.dropdown>ul.dropdown-menu>li>a:hover {
+    color: #0094D7;
+    background-color: #FFF;
+    background-image: none;
+    text-decoration: none;
+    box-shadow: none;
+  }
+
+
+  /* Bootstrap Default Overrides - Customized Dropdowns for the Side Nav */
+
+  .bg-special-home {
+    background-color: #99AEBD;
+  }
+
+  .side-nav>li.dropdown>ul.dropdown-menu {
+    position: relative;
+    min-width: 225px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    font-size : 13px;
+    text-align: center;
+  }
+
+  .side-nav>li.dropdown>ul.dropdown-menu>li>a {
+    color: #FFF;
+    padding-left :10px;
+  }
+
+  .side-nav>li.dropdown>ul.dropdown-menu>li.active>a {
+    color: #FFF;
+    background-color:#0094D7;
+  } 
+
+
+  .dropdown-menu>.active>a, 
+  .dropdown-menu>.active>a:focus, 
+  .dropdown-menu>.active>a:hover{
+  color: #495D6C;
+  background-color: #FFF;
+  background-image: none;
+  }
+
+  .col-sm-3.specific {
+    width : 20%;
+  }
+
+  .col-sm-9.specific {
+    width : 80%;
+  }
+
+}

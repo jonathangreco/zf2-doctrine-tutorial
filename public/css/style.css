@@ -1,6 +1,7 @@
 body {
-    padding-top: 60px;
     padding-bottom: 40px;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #e7e7e7;
 }
 
 .zf-green {
@@ -30,12 +31,6 @@ body {
   background-color: #57a900;
 }
 
-div.container a.brand {
-    background: url("../img/zf2-logo.png") no-repeat scroll 0 10px transparent;
-    margin-left: 0;
-    padding: 8px 20px 12px 40px;
-}
-
 /**
  * LANG / langue
  */
@@ -56,6 +51,33 @@ div.container a.brand {
 {
  cursor: pointer;
 }
+
+.icon-home
+{
+  float:right;
+  line-height : 0.8;
+  font-size: 24px;
+}
+
+.hr-menu {
+  width: 80%;
+  border-top : 1px solid #676e75 ;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.logoCorporateRedim{
+  width:160px;
+  height:40px;
+  margin-top: 5px;
+}
 .pagination-centered {
   text-align: center;
+}
+
+.margin-top-5 {
+  margin-top : 5px;
+}
+.margin-left-5 {
+  margin-left :5px;
 }
