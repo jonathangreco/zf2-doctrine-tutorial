@@ -117,27 +117,6 @@ Create both databases
 Run this command line to generate tables :
 `php public/index.php orm:schema-tool:update --force`
 
-And here the code for configure factories in you application Module.php file :
-```php
- public function getServiceConfig()
-    {
-        return array(
-            'factories' => array(
-                'doctrine.connection.other_DB'           => new \DoctrineORMModule\Service\DBALConnectionFactory('other_DB'),
-                'doctrine.configuration.other_DB'        => new \DoctrineORMModule\Service\ConfigurationFactory('other_DB'),
-                'doctrine.entitymanager.other_DB'        => new \DoctrineORMModule\Service\EntityManagerFactory('other_DB'),
-                'doctrine.driver.other_DB'               => new \DoctrineModule\Service\DriverFactory('other_DB'),
-                'doctrine.eventmanager.other_DB'         => new \DoctrineModule\Service\EventManagerFactory('other_DB'),
-                'doctrine.entity_resolver.other_DB'      => new \DoctrineORMModule\Service\EntityResolverFactory('other_DB'),
-                'doctrine.sql_logger_collector.other_DB' => new \DoctrineORMModule\Service\EntityResolverFactory('other_DB'),
-                'DoctrineORMModule\Form\Annotation\AnnotationBuilder' => function(\Zend\ServiceManager\ServiceLocatorInterface $sl) {
-                    return new \DoctrineORMModule\Form\Annotation\AnnotationBuilder($sl->get('doctrine.entitymanager.other_DB'));
-                },
-            ),
-        );
-    }
-```
-
 For retrieving your EntityManager Everywhere use :
 
 ```php
@@ -153,7 +132,7 @@ $this->em = $this->getServiceManager()->get('doctrine.entitymanager.other_DB');
 ```
 Translation
 -----------
-This skeleton can handle translation in french to english (or more depends to you) with session(feel free to modify this with route if you prefer).
+This skeleton can handle translation in french to english (or more depends to you) with route param(feel free to modify this with session if you prefer).
 So, don't forget to download PoEdit software for translate all your module.
 This skeleton also translate your forms. zf2 will be translate all your labels using those methodes : formSubmit, formLabel and formElement and make sure that your string are translated.
 
