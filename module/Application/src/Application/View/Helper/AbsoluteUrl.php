@@ -2,7 +2,6 @@
 /**
  * @package Application
  * @author Jonathan Greco <nataniel.greco@gmail.com>
- * @author Florent Blaison <florent.blaison@gmail.com>
  */
 namespace Application\View\Helper;
  

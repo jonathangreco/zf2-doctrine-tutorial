@@ -2,7 +2,7 @@
 <html lang="<?php echo substr($this->navigation()->getTranslator()->getLocale(), 0, 2); ?>">
     <head>
         <meta charset="utf-8">
-        <?php echo $this->headTitle('Zf2 & Doctrine Tutorial by Jonathan Greco')
+        <?php echo $this->headTitle('Jonathan Greco')
             ->setSeparator(' - ')
             ->setAutoEscape(false) 
         ?>
@@ -62,7 +62,7 @@
                                 <?php 
                                     //On gère ici l'affichage des langue dans la navigation on change la 
                                     //couleur du drapeau selon la langue
-                                    if($this->navigation()->getTranslator()->getLocale() == 'fr')
+                                    if($this->navigation()->getTranslator()->getLocale() == 'fr_FR')
                                     {
                                         echo '<span class="flag fr"></span> FR <span class="caret"></span>';
                                     } else {
@@ -71,10 +71,10 @@
                                 ?>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="<?= $this->url($this->route, array('lang' => 'fr'));?>">
+                                <li><a href="<?php echo $this->url('changelocale', array('locale'=>'fr_FR', 'redirecturl'=>urlencode($this->absoluteUrl()))); ?>">
                                     <span class="flag fr"></span> Français
                                 </a></li>
-                                <li><a href="<?=$this->url($this->route, array('lang' => 'en'));?>">
+                                <li><a href="<?php echo $this->url('changelocale', array('locale'=>'en_US', 'redirecturl'=>urlencode($this->absoluteUrl()))); ?>">
                                     <span class="flag gb"></span> English
                                 </a></li>
                             </ul>
@@ -175,7 +175,7 @@
                             }
                         }
                         echo $this->navigation('navigation')->breadcrumbs()->setMinDepth(0)->setPartial(array('partial/breadcrumbs.phtml', 'Application'));
-                        echo $this->navigation()->getTranslator()->getLocale();
+                        
                         echo $this->content; 
                     ?>
                 </div>

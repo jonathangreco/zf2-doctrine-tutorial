@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
  
-<project name="your_project" default="main">
-    <property name="basedir" value="c:/wamp/www/your_project/" />
+<project name="other_project" default="main">
+    <property name="basedir" value="c:/wamp/www/other_project/" />
  
-     <fileset id="php-files" dir="${basedir}">
+ 	<fileset id="php-files" dir="${basedir}">
         <include name="**/*.php"/>
         <exclude name="vendor/**"/>
         <exclude name="build/**"/>
@@ -45,82 +45,80 @@
         <mkdir dir="${basedir}/build/pdepend"/>
     </target>
 
-     <!-- works perfectly -->
+ 	<!-- works perfectly -->
     <target name="phploc" description="your project is too heavy loose weight fat boy">
         <exec executable="phploc.bat">
-            <arg path="${basedir}/module" />
+			<arg path="${basedir}/module" />
             <arg value="--log-csv" />
             <arg value="${basedir}/build/logs/phploc.csv" />
         </exec>
     </target>
-    <!-- works perfectly -->
+	<!-- works perfectly -->
     <target name="pdepend" description="more metrics chart please">
-        <exec command="pdepend --jdepend-xml=${basedir}/build/logs/jdepend.xml 
-           --jdepend-chart=${basedir}/build/pdepend/dependencies.svg 
-           --overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg 
-           --suffix=php
-           --ignore=vendor,data,tests,build,public/js
-           ${basedir}" 
-        escape="false" />
+    	<exec command="pdepend --jdepend-xml=${basedir}/build/logs/jdepend.xml 
+		   --jdepend-chart=${basedir}/build/pdepend/dependencies.svg 
+		   --overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg 
+		   --suffix=php
+		   --ignore=vendor,tests,build,public/js
+		   ${basedir}" 
+		escape="false" />
     </target>
     <!-- works perfectly -->
-    <target name="phpmd-ci" description="Generate pmd.xml using PHPMD">
+	<target name="phpmd-ci" description="Generate pmd.xml using PHPMD">
         <phpmd rulesets="codesize,design,naming,unusedcode">
             <fileset refid="php-files"/>
             <formatter type="xml" outfile="${basedir}/build/logs/pmd.xml"/>
         </phpmd>
     </target>  
     <!-- works perfectly -->
-    <target name="phpcs-ci" description="coding with checkstyle">
-        <exec passthru="false" command="phpcs 
+	<target name="phpcs-ci" description="coding with checkstyle">
+		<exec passthru="false" command="phpcs 
             --report=checkstyle
             --report-file=${basedir}/build/logs/checkstyle.xml
             --standard=PSR2
-            --ignore=vendor,data,tests,public/js,build
+            --ignore=vendor,tests,public/js,build
             --extensions=php
             ${basedir}"/>
-    </target>
-    <!-- Marche désormais -->
-    <target name="phpcpd" description="repeat yourself is killing you">
-        <exec command="phpcpd
-                --exclude ${basedir}/vendor
-                --exclude ${basedir}/tests
-                --exclude ${basedir}/build
-                --exclude ${basedir}/public/js
-                --exclude ${basedir}/data
-                --log-pmd ${basedir}/build/logs/pmd-cpd.xml
-                --min-lines 5
-                --min-tokens 5
-                ${basedir}/module"
-        />
-    </target>
-     <!-- Faire un phing call sur cette target rend le code fonctionnel -->
+	</target>
+	<!-- Ne marche pas non plus en raison de : pas de test unitaire encore -->
+	<target name="phpcpd" description="repeat yourself is killing you">
+		<exec executable="phpcpd">
+			<arg line="--log-pmd ${basedir}/build/logs/pmd-cpd.xml
+				--exclude ${basedir}/vendor
+				--exclude ${basedir}/tests
+				--exclude ${basedir}/build
+				--exclude ${basedir}/public/js
+				--suffixes php
+				${basedir}" />
+		</exec>
+	</target>
+ 	<!-- Faire un phing call sur cette target rend le code fonctionnel -->
     <target name="phpdoc" description="Generate API documentation using PHPDocumentor">
-        <phpdoc title="Tests API Documentation"
+		<phpdoc title="Tests API Documentation"
               destdir="${basedir}/build/api"
               sourcecode="false"
               output="HTML:Smarty:PHP"
               quiet="true">
             <fileset refid="php-files"/>
         </phpdoc>
-    </target>
+	</target>
 
     <target name="phpunit" description="Lancement des tests unitaires">
         <echo msg="Start Unit testing" />
-        <exec command="phpunit.bat --configuration=C:/wamp/www/your_project/tests/phpunit.xml"/>
+        <exec command="phpunit.bat --configuration=C:/wamp/www/other_project/tests/phpunit.xml"/>
     </target>
 
-    <!-- works perfectly -->
+	<!-- works perfectly -->
     <target name="phpcb" description="are you coding properly">
-        <exec executable="phpcb.bat">
-            <arg value="--log" />
-            <arg path="${basedir}/build/logs" />
-            <arg value="--source" />
-            <arg path="${basedir}" />
-            <arg value="--output" />
-            <arg path="${basedir}/build/code-browser" />
-            <arg value="--ignore"/>
-            <arg path="${basedir}/vendor/,${basedir}/data/,${basedir}/tests/,${basedir}/build/,${basedir}/public/js/"/>
-        </exec>
+		<exec executable="phpcb.bat">
+			<arg value="--log" />
+			<arg path="${basedir}/build/logs" />
+			<arg value="--source" />
+			<arg path="${basedir}" />
+			<arg value="--output" />
+			<arg path="${basedir}/build/code-browser" />
+			<arg value="--ignore"/>
+			<arg path="${basedir}/vendor/,${basedir}/tests/,${basedir}/build/,${basedir}/public/js/"/>
+		</exec>
     </target>
 </project>

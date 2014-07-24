@@ -17,15 +17,11 @@ return array(
             'album' => array(
                 'type'    => 'Segment',
                 'options' => array(
-                    'route'       => '/:lang/album',
-                    'constraints' => array(
-                        'lang' => '(en|nl|fr|ru)?',
-                    ),
+                    'route'       => '/album',
                     'defaults'    => array(
                         '__NAMESPACE__' => 'Album\Controller',
                         'controller'    => 'Album',
                         'action'     => 'index',
-                        'lang'      => 'fr'
                     ),
                 ),
                 'may_terminate' => true,
@@ -62,7 +58,7 @@ return array(
     ),
     //obligatoire pour les traduction par routes
     'translator' => array(
-        'locale' => 'fr',
+        'locale' => 'fr_FR',
         'translation_file_patterns' => array(
             array(
                 'type'     => 'gettext',
@@ -87,6 +83,9 @@ return array(
             'album/album/edit'   => __DIR__ . '/../view/album/album/edit.phtml',
             'album/album/delete' => __DIR__ . '/../view/album/album/delete.phtml',
             'album/album/page_helper' => __DIR__ . '/../view/album/album/page_album.phtml',
+        ),
+        'template_path_stack' => array(
+            __DIR__ . '/../view',
         ),
     ),
     'form_elements'   => array(

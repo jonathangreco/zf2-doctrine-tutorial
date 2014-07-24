@@ -11,29 +11,10 @@ return array(
             'home' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/[:lang]',
-                    'constraints' => array(
-                        'lang' => '(en|nl|fr|ru)?'
-                    ),
+                    'route'    => '/',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Index',
                         'action'     => 'index',
-                        'lang' => 'fr',
-                    ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'language' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '[/:lang]',
-                            'constraints' => array(
-                                'lang' => '(en|nl|fr|ru)?'
-                            ),
-                            'defaults' => array(
-                                'lang' => 'fr',
-                            ),
-                        ),
                     ),
                 ),
             ),
@@ -45,10 +26,7 @@ return array(
             'application' => array(
                 'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '[/:lang]/application',
-                    'constraints' => array(
-                        'lang' => '(en|nl|fr|ru)?',
-                    ),
+                    'route'    => '/application',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller'    => 'Index',
@@ -71,6 +49,18 @@ return array(
                     ),
                 ),
             ),
+            'changelocale' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/changelocale[/:locale[/:redirecturl]]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Translator',
+                        'action' => 'changelocale',
+                        'locale' => '',
+                        'redirecturl' => ''
+                    )
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
@@ -87,9 +77,12 @@ return array(
             'Application\Service\ToolBoxService' => 'Application\Factory\ToolBoxServiceFactory',
             'Application\Service\MailService' => 'Application\Factory\MailServiceFactory',
         ),
+        'invokables' => array(
+            'FlashMessageListener' => 'Application\Event\FlashMessageListener',
+        ),
     ),
     'translator' => array(
-        'locale' => 'fr',
+        'locale' => 'fr_FR',
         'translation_file_patterns' => array(
             array(
                 'type'     => 'gettext',
@@ -111,6 +104,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\Translator' => 'Application\Controller\TranslatorController'
         ),
     ),
     'view_manager' => array(
