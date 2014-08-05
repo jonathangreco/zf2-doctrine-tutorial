@@ -50,7 +50,7 @@ trait LogTrait
         $string = preg_replace('#\s+#', ' ', $date.' : '.$string).PHP_EOL;
         $this->writeFile($string, $nom_fichier, $dir, false);
         if ($sendMail)
-            $this->sendMail("[LOG] Mylink", $string, array(ConstantService::MAIL_DEV_LOG_1, ConstantService::MAIL_DEV_LOG_2));
+            $this->sendMail("[LOG]", $string, array(ConstantService::MAIL_DEV_LOG_1, ConstantService::MAIL_DEV_LOG_2));
     }
 
 }
