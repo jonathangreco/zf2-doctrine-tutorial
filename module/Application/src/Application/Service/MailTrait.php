@@ -50,7 +50,7 @@ trait MailTrait
         {
             $mailFrom = ConstantService::MAIL_SERVER;
             if (empty($fromName)) 
-                $fromName = 'Mylink by DocSourcing';
+                $fromName = 'Your project';
         }
         if (empty($fromName)) 
             $fromName = $mailFrom;
