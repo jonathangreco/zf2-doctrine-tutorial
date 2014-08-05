@@ -18,7 +18,6 @@ class ToolBoxService implements ServiceLocatorAwareInterface
 {
 
     use ServiceLocatorAwareTrait;
-    use DataObjectAccessTrait;
     use DirectoryAndFileOperationTrait;
     use LogTrait;
     use MailTrait;
