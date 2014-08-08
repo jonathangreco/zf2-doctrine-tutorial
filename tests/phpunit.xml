@@ -6,22 +6,19 @@
         verbose="true">
     <testsuites>
         <testsuite name="All Modules">
-            <directory>../module/Album/tests/AlbumTest</directory>
-            <directory>../module/Application/tests/ApplicationTest</directory>
+            <directory>../module/*/tests/*Test</directory>
         </testsuite>
     </testsuites>
    <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
-            <directory>../module/Application/src/</directory>
-            <directory>../module/Album/src/</directory>
+            <directory>../module/*/src/</directory>
+            <directory>../module/*/src/</directory>
         </whitelist>
         <blacklist>
             <directory suffix=".php">../vendor</directory>
             <directory suffix=".php">../config</directory>
-            <file>../module/Application/Module.php</file>
-            <file>../module/Application/tests/ApplicationBootstrap.php</file>
-            <file>../module/Album/Module.php</file>
-            <file>../module/Album/tests/AlbumBootstrap.php</file>
+            <file>../module/*/Module.php</file>
+            <file>../module/*/tests/*Bootstrap.php</file>
         </blacklist>
     </filter>
     <logging>
