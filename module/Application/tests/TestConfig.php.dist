@@ -12,9 +12,6 @@ return array(
         'DoctrineORMModule',
         'Application',
         'Album',
-        'Invoice',
-        'Order',
-        'Item',
     ),
     'module_listener_options' => array(
         'config_glob_paths'    => array(
